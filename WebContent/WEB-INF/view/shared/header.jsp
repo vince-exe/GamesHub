@@ -1,31 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/style/style.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/style/header.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/styles/style.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/styles/header.css">
 
 <header class="main-header">
     <div class="header-container">
         
         <div class="header-logo">
-            <a href="${pageContext.request.contextPath}/images/logo_sito.png" class="logo-link">
-                <span class="logo-text">GAME <span class="accent-text">KEY</span> HUB</span>
-            </a>
+        	<span class="logo-text">GAME <span class="accent-text">KEY</span> HUB</span>
         </div>
 
-        <input type="checkbox" id="menu-toggle" class="menu-toggle">
-        <label for="menu-toggle" class="hamburger-label">
-            <span></span>
-            <span></span>
-            <span></span>
-        </label>
-
-        <nav class="nav-menu">
-            <ul class="nav-list">
-                <li><a href="#" class="nav-link">Giochi PC</a></li>
-                <li><a href="#" class="nav-link">Console</a></li>
-                <li><a href="#" class="nav-link">Offerte</a></li>
-                <li><a href="#" class="nav-link">Supporto</a></li>
-            </ul>
-        </nav>
+		<ul class="nav-menu">
+            <li><a href="#" class="nav-link">Giochi PC</a></li>
+            <li><a href="#" class="nav-link">Console</a></li>
+            <li><a href="#" class="nav-link">Offerte</a></li>
+       		<li><a href="#" class="nav-link">Supporto</a></li>
+        </ul>
 
         <div class="user-actions">
             <a href="#" class="action-link login-btn">
