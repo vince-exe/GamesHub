@@ -7,6 +7,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 @WebServlet("/home")
 public class HomeServlet extends HttpServlet {
@@ -14,6 +15,7 @@ public class HomeServlet extends HttpServlet {
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		req.getRequestDispatcher("/WEB-INF/view/home.jsp").forward(req, resp);
+		HttpSession session = req.getSession(false); // se non esiste non creare la sessione
+		
 	}
 }

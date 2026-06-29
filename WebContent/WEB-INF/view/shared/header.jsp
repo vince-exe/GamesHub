@@ -10,10 +10,9 @@
         </div>
 
 		<ul class="nav-menu">
-            <li><a href="#" class="nav-link">Giochi PC</a></li>
             <li><a href="#" class="nav-link">Console</a></li>
             <li><a href="#" class="nav-link">Offerte</a></li>
-       		<li><a href="#" class="nav-link">Supporto</a></li>
+            <li><a href="#" class="nav-link">F.A.Q</a></li>
         </ul>
 
         <div class="user-actions">
