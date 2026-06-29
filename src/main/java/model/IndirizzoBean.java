@@ -1,6 +1,8 @@
 package model;
 
-public class Indirizzo {
+import java.io.Serializable;
+
+public class IndirizzoBean implements Serializable {
 
 	private int id;
 	
