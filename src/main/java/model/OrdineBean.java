@@ -3,8 +3,6 @@ package model;
 import java.io.Serializable;
 import java.sql.Timestamp;
 
-import model.enums.StatoOrdine;
-
 public class OrdineBean implements Serializable {
 	
 	private int id;

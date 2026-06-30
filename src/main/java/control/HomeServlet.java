@@ -17,5 +17,6 @@ public class HomeServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		HttpSession session = req.getSession(false); // se non esiste non creare la sessione
 		
+		req.getRequestDispatcher("/WEB-INF/view/home.jsp").forward(req, resp);
 	}
 }

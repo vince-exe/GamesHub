@@ -11,7 +11,7 @@
 
 		<ul class="nav-menu">
             <li><a href="#" class="nav-link">Console</a></li>
-            <li><a href="#" class="nav-link">Offerte</a></li>
+            <li><a href="#" class="nav-link">Videogiochi</a></li>
             <li><a href="#" class="nav-link">F.A.Q</a></li>
         </ul>
 
