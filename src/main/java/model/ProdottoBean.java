@@ -2,6 +2,7 @@ package model;
 
 import java.io.InputStream;
 import java.io.Serializable;
+import java.math.BigDecimal;
 
 public class ProdottoBean implements Serializable {
 	
@@ -11,7 +12,7 @@ public class ProdottoBean implements Serializable {
 	
 	private String descrizione;
 	
-	private float prezzo;
+	private BigDecimal prezzo;
 	
 	private InputStream immagine;
 	
@@ -51,11 +52,11 @@ public class ProdottoBean implements Serializable {
 		this.descrizione = descrizione;
 	}
 
-	public float getPrezzo() {
+	public BigDecimal getPrezzo() {
 		return prezzo;
 	}
 
-	public void setPrezzo(float prezzo) {
+	public void setPrezzo(BigDecimal prezzo) {
 		this.prezzo = prezzo;
 	}
 
