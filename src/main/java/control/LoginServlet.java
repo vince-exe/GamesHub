@@ -16,8 +16,8 @@ public class LoginServlet extends HttpServlet {
 	}
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		doGet(request, response);
+		request.setAttribute("errore", "Email o Password errati. Riprova.");
+		request.getRequestDispatcher("/WEB-INF/view/login.jsp").forward(request, response);
 	}
 
 }
