@@ -31,7 +31,7 @@
 		
 					<div class="input-group">
 						<label for="password">Password</label>
-						<input type="password" id="password" name="password" placeholder="********" minlength="8" required
+						<input type="password" id="password" name="password" placeholder="********" minlength="8" autocomplete="new-password" required
 						onchange="validateFormElem(this, document.getElementById('errorPassword'), 'password invalida')">
 						
 						<span id="errorPassword" class="error-message"></span>
