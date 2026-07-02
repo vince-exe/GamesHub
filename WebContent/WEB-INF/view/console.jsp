@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>GamesHub - Console</title>
 </head>
 <body>
 	<%@ include file="shared/header.jsp"%>

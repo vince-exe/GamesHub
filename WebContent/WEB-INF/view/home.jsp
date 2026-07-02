@@ -24,7 +24,7 @@
 	        <div class="video-overlay"></div>
 	        
 	        <div class="hero-content">
-	            <h1 class="hero-title">BENVENUTO SU <span class="highlight">GAMESHUB</span></h1>
+	            <h1 class="hero-title">BENVENUTO SU GAMES<span class="highlight">HUB</span></h1>
 	            <p class="hero-subtitle">Il tuo portale per videogiochi e console ai prezzi più bassi del web.<br>
 	            - By gamers for gamers.
 	            </p>

@@ -6,18 +6,18 @@
     <div class="header-container">
         
         <div class="header-logo">
-        	<span class="logo-text">GAME <span class="accent-text">KEY</span> HUB</span>
+        	<span class="logo-text">GAMES<span class="accent-text">HUB</span></span>
         </div>
-
+		
 		<ul class="nav-menu">
-			<li><a href="<%=request.getContextPath()%>/home" class="nav-link">Homepage</a>
-            <li><a c class="nav-link">Console</a></li>
+			<li><a href="<%=request.getContextPath()%>/home" class="nav-link">Home</a>
+            <li><a href="<%=request.getContextPath()%>/console" class="nav-link">Console</a></li>
             <li><a href="<%=request.getContextPath()%>/videogiochi" class="nav-link">Videogiochi</a></li>
             <li><a href="#" class="nav-link">F.A.Q</a></li>
         </ul>
-
+		
         <div class="user-actions">
-            <a href="#" class="action-link login-btn">
+            <a href="<%=request.getContextPath()%>/login" class="action-link login-btn">
                 <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
                     <circle cx="12" cy="7" r="4"></circle>
