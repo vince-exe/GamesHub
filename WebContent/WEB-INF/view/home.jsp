@@ -25,10 +25,12 @@
 	        
 	        <div class="hero-content">
 	            <h1 class="hero-title">BENVENUTO SU <span class="highlight">GAMESHUB</span></h1>
-	            <p class="hero-subtitle">Il tuo portale definitivo per chiavi digitali, videogiochi e console gaming ai prezzi più bassi del web.</p>
+	            <p class="hero-subtitle">Il tuo portale per videogiochi e console ai prezzi più bassi del web.<br>
+	            - By gamers for gamers.
+	            </p>
 	            <div class="hero-buttons">
-	                <a href="videogiochi" class="btn btn-primary">Sfoglia Videogiochi</a>
-	                <a href="#scopri-di-piu" class="btn btn-secondary">Scopri Console</a>
+	                <a href="<%=request.getContextPath()%>/videogiochi" class="btn btn-primary">Sfoglia Videogiochi</a>
+	                <a href="<%=request.getContextPath()%>/console" class="btn btn-secondary">Scopri Console</a>
 	            </div>
 	        </div>
 	    </section>

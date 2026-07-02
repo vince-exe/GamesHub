@@ -1,0 +1,46 @@
+@charset "UTF-8";
+
+.empty-state-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 60vh; /* Prende il 60% dell'altezza della finestra, ideale se hai un'header e un footer */
+    padding: 20px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* La scheda centrale */
+.empty-state-card {
+    background: #ffffff;
+    padding: 40px 30px;
+    border-radius: 16px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+    text-align: center;
+    max-width: 400px;
+    width: 100%;
+    border: 1px solid #eef2f3;
+}
+
+/* L'icona SVG */
+.empty-state-icon {
+    width: 80px;
+    height: 80px;
+    color: #94a3b8; /* Un grigio neutro e moderno */
+    margin-bottom: 20px;
+}
+
+/* Titolo principale */
+.empty-state-card h2 {
+    color: #1e293b;
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+/* Sottotitolo descrittivo */
+.empty-state-card p {
+    color: #64748b;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    margin-bottom: 25px;
+}

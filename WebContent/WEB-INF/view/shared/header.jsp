@@ -11,7 +11,7 @@
 
 		<ul class="nav-menu">
 			<li><a href="<%=request.getContextPath()%>/home" class="nav-link">Homepage</a>
-            <li><a href="<%=request.getContextPath()%>/console">Console</a></li>
+            <li><a c class="nav-link">Console</a></li>
             <li><a href="<%=request.getContextPath()%>/videogiochi" class="nav-link">Videogiochi</a></li>
             <li><a href="#" class="nav-link">F.A.Q</a></li>
         </ul>
