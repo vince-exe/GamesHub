@@ -7,7 +7,7 @@ CREATE TABLE Utente (
     nome VARCHAR(50) NOT NULL,
     cognome VARCHAR(50) NOT NULL,
     eta INT NOT NULL,
-    sesso CHAR(1),
+    sesso VARCHAR(6),
     email VARCHAR(100) NOT NULL UNIQUE,
     password VARCHAR(255) NOT NULL,
     ruolo VARCHAR(20) NOT NULL DEFAULT 'Utente',
@@ -98,3 +98,6 @@ CREATE TABLE RigaOrdine (
     CONSTRAINT FK_Composizione_Prodotto FOREIGN KEY (idProdotto) 
         REFERENCES Prodotto(id) ON DELETE RESTRICT
 );
+
+-- AMMINISTRATORE --
+INSERT INTO Utente (email, password, nome, cognome, ruolo, telefono, eta, sesso) VALUES ('admin@gmail.com', 'admin', 'mario', 'rossi', 'amministratore', '3393089834', 21, 'uomo');
