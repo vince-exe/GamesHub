@@ -25,6 +25,7 @@ public class RegistrazioneServlet extends HttpServlet {
 	}
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		/*
 		UtenteBean utente = new UtenteBean();
 		UtenteDao utenteDao = new UtenteDao();
 		
@@ -44,6 +45,8 @@ public class RegistrazioneServlet extends HttpServlet {
 			request.setAttribute("errore", "Errore imprevisto sul server");
 			e.printStackTrace();
 		}
+		*/
+		System.out.print("Ha effettuato la POST");
 	}
 
 }
