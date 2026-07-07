@@ -4,14 +4,14 @@ USE GamesHubDB;
 
 CREATE TABLE Utente (
     id INT AUTO_INCREMENT,
-    nome VARCHAR(50) NOT NULL,
-    cognome VARCHAR(50) NOT NULL,
+    nome VARCHAR(20) NOT NULL,
+    cognome VARCHAR(20) NOT NULL,
     eta INT NOT NULL,
     sesso VARCHAR(6),
     email VARCHAR(100) NOT NULL UNIQUE,
-    password VARCHAR(255) NOT NULL,
+    password VARCHAR(20) NOT NULL,
     ruolo VARCHAR(20) NOT NULL DEFAULT 'Utente',
-    telefono VARCHAR(20),
+    telefono VARCHAR(13),
     PRIMARY KEY (id)
 );
 
