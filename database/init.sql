@@ -6,9 +6,9 @@ CREATE TABLE Utente (
     id INT AUTO_INCREMENT,
     nome VARCHAR(20) NOT NULL,
     cognome VARCHAR(20) NOT NULL,
-    eta INT NOT NULL,
+    dataNascita TIMESTAMP NOT NULL,
     sesso VARCHAR(6),
-    email VARCHAR(100) NOT NULL UNIQUE,
+    email VARCHAR(30) NOT NULL UNIQUE,
     password VARCHAR(20) NOT NULL,
     ruolo VARCHAR(20) NOT NULL DEFAULT 'Utente',
     telefono VARCHAR(13),
@@ -100,4 +100,4 @@ CREATE TABLE RigaOrdine (
 );
 
 -- AMMINISTRATORE --
-INSERT INTO Utente (email, password, nome, cognome, ruolo, telefono, eta, sesso) VALUES ('admin@gmail.com', 'admin', 'mario', 'rossi', 'amministratore', '3393089834', 21, 'uomo');
+INSERT INTO Utente (email, password, nome, cognome, ruolo, telefono, dataNascita, sesso) VALUES ('admin@gmail.com', 'admin', 'mario', 'rossi', 'amministratore', '3393089834', '2005-06-23', 'uomo');

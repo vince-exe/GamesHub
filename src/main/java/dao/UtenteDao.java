@@ -47,7 +47,7 @@ public class UtenteDao implements IUtenteDao {
                     utente.setCognome(rs.getString("cognome"));
                     utente.setRuolo(rs.getString("ruolo"));
                     utente.setTelefono(rs.getString("telefono"));
-                    utente.setEta(rs.getInt("eta"));
+                    utente.setDataNascita(rs.getTimestamp("eta"));
                     utente.setSesso(rs.getString("sesso"));
                 }
             }
@@ -70,7 +70,7 @@ public class UtenteDao implements IUtenteDao {
 			ps.setString(5, utente.getRuolo());
 			ps.setString(6, utente.getTelefono());
 			ps.setString(7, utente.getSesso());
-			ps.setInt(8, utente.getEta());
+			ps.setTimestamp(8, utente.getDataNascita());
 			
 			ps.executeUpdate();
 		}	

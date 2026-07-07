@@ -1,6 +1,7 @@
 package model;
 
 import java.io.Serializable;
+import java.sql.Timestamp;
 
 public class UtenteBean implements Serializable {
 	private int id;
@@ -9,7 +10,7 @@ public class UtenteBean implements Serializable {
 	
 	private String cognome;
 	
-	private int eta;
+	private Timestamp dataNascita;
 	
 	private String sesso;
 	
@@ -45,12 +46,12 @@ public class UtenteBean implements Serializable {
 		this.cognome = cognome;
 	}
 
-	public int getEta() {
-		return eta;
+	public Timestamp getDataNascita() {
+		return this.dataNascita;
 	}
 
-	public void setEta(int eta) {
-		this.eta = eta;
+	public void setDataNascita(Timestamp dataNascita) {
+		this.dataNascita = dataNascita;
 	}
 
 	public String getSesso() {
