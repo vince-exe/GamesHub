@@ -67,7 +67,8 @@
 				<div class="form-row-genere-data">
 					<div class="input-group">
 						<label for="dataNascita">Data di Nascita</label>
-						<input type="date" id="dataNascita" name="dataNascita" required>
+						<input type="date" id="dataNascita" name="dataNascita" required
+						onchange="checkDataNascita(this, document.getElementById('errorData'))">
 						<span id="errorData" class="error-message"></span>
 					</div>
 
@@ -92,9 +93,16 @@
 						<%= request.getAttribute("errore") %>
 					</div>
 				<% } %>
-        
-				<button type="submit" class="btn-register">Registrati</button>
+
 				
+				<% if (request.getAttribute("messaggio") != null) { %>
+					<div class="server-success">
+						<%= request.getAttribute("messaggio") %>
+					</div>
+				<% }
+				else { %>
+					<button type="submit" class="btn-register">Registrati</button>
+				<%} %>
 			</form>
 			
 			<div class="register-footer">

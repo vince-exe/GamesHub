@@ -69,6 +69,7 @@ function checkRegistrazioneForm() {
 	if (!checkDataNascita(form.dataNascita, spanDataNascita))
 		valid = false;
 	
+	console.log(valid)
     return valid;
 }
 

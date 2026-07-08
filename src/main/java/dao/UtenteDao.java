@@ -47,7 +47,7 @@ public class UtenteDao implements IUtenteDao {
                     utente.setCognome(rs.getString("cognome"));
                     utente.setRuolo(rs.getString("ruolo"));
                     utente.setTelefono(rs.getString("telefono"));
-                    utente.setDataNascita(rs.getTimestamp("eta"));
+                    utente.setDataNascita(rs.getTimestamp("dataNascita"));
                     utente.setSesso(rs.getString("sesso"));
                 }
             }
@@ -59,7 +59,7 @@ public class UtenteDao implements IUtenteDao {
 
 	@Override
 	public void doCreate(UtenteBean utente) throws SQLException {
-		String query = "INSERT INTO utente (email, password, nome, cognome, ruolo, telefono, sesso, eta) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+		String query = "INSERT INTO utente (email, password, nome, cognome, ruolo, telefono, sesso, dataNascita) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 		
 		try(Connection conn = this.ds.getConnection();
 			PreparedStatement ps = conn.prepareStatement(query)) {

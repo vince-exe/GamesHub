@@ -9,13 +9,20 @@ import model.UtenteBean;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.sql.SQLIntegrityConstraintViolationException;
+import java.sql.Timestamp;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 
 import dao.UtenteDao;
 
 @WebServlet("/registrazione")
 public class RegistrazioneServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
+	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+	
     public RegistrazioneServlet() {
         super();
     }
@@ -25,28 +32,38 @@ public class RegistrazioneServlet extends HttpServlet {
 	}
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		/*
-		UtenteBean utente = new UtenteBean();
-		UtenteDao utenteDao = new UtenteDao();
-		
-		utente.setEmail(request.getParameter("email"));
-		utente.setPassword(request.getParameter("password"));
-		utente.setNome(request.getParameter("nome"));
-		utente.setCognome(request.getParameter("cognome"));
-		utente.setSesso(request.getParameter("sesso"));
-		utente.setTelefono(request.getParameter("telefono"));
-		utente.setRuolo("cliente");
-		utente.setEta(Integer.parseInt(request.getParameter("eta")));
-		
-		try {
-			utenteDao.doCreate(utente);
-			response.sendRedirect(request.getContextPath() + "/login.jsp");
-		} catch (SQLException e) {
-			request.setAttribute("errore", "Errore imprevisto sul server");
-			e.printStackTrace();
-		}
-		*/
-		System.out.print("Ha effettuato la POST");
+	    UtenteBean utente = new UtenteBean();
+	    UtenteDao utenteDao = new UtenteDao();
+	    
+	    utente.setEmail(request.getParameter("email"));
+	    utente.setPassword(request.getParameter("password"));
+	    utente.setNome(request.getParameter("nome"));
+	    utente.setCognome(request.getParameter("cognome"));
+	    utente.setTelefono(request.getParameter("telefono"));
+	    utente.setRuolo("cliente");
+	    utente.setSesso(request.getParameter("genere"));
+	    
+	    String dataNascitaStr = request.getParameter("dataNascita");
+        LocalDate localDate = LocalDate.parse(dataNascitaStr, formatter);
+        
+        // asStartOfDay() mi aggiunge la sezione di tempo (mezzanotte) tanto a me non interessa quando è nato precisamente
+        LocalDateTime localDateTime = localDate.atStartOfDay();
+        utente.setDataNascita(Timestamp.valueOf(localDateTime));
+        
+	    try {
+	        utenteDao.doCreate(utente);	        
+	        request.setAttribute("messaggio", "Registrazione completata con successo! Ora puoi accedere");	        
+	    }
+	    catch(SQLIntegrityConstraintViolationException e) {
+	        request.setAttribute("errore", "Questa email è già utilizzata da un altro utente");
+	    }
+	    catch (SQLException e) {
+	        request.setAttribute("errore", "Errore imprevisto sul server");
+	        e.printStackTrace();
+	    }
+	    finally {
+	        request.getRequestDispatcher("/WEB-INF/view/registrazione.jsp").forward(request, response);
+	    }
 	}
 
 }
