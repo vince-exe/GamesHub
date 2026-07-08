@@ -64,6 +64,29 @@
 				    <span id="errorConfermaPassword" class="error-message"></span>
 				</div>
 
+				<div class="form-row-genere-data">
+					<div class="input-group">
+						<label for="dataNascita">Data di Nascita</label>
+						<input type="date" id="dataNascita" name="dataNascita" required>
+						<span id="errorData" class="error-message"></span>
+					</div>
+
+					<div class="input-group">
+						<label>Genere</label>
+						<div class="radio-container">
+							<label class="radio-label">
+								<input type="radio" name="genere" value="uomo" checked>
+								<span>Uomo</span>
+							</label>
+							<label class="radio-label">
+								<input type="radio" name="genere" value="donna">
+								<span>Donna</span>
+							</label>
+						</div>
+						<span id="errorGenere" class="error-message"></span>
+					</div>
+				</div>
+
 				<% if (request.getAttribute("errore") != null) { %>
 					<div class="server-error">
 						<%= request.getAttribute("errore") %>

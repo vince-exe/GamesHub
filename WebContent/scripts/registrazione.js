@@ -20,6 +20,27 @@ function checkConfirmPassword(formElem, span, passwordElement) {
     return true;
 }
 
+function checkDataNascita(formElem, span) {
+    if (!formElem.checkValidity() && formElem.validity.valueMissing) {
+        formElem.classList.add("input-error");
+        span.innerHTML = "Questo campo è obbligatorio";
+        return false;
+    }
+
+    const dataInserita = new Date(formElem.value);
+    const today = new Date();
+
+    if (dataInserita.getTime() > today.getTime()) {
+        formElem.classList.add("input-error");
+        span.innerHTML = "La data di nascita non può essere nel futuro";
+        return false;
+    }
+
+    formElem.classList.remove("input-error");
+    span.innerHTML = "";
+    return true;
+}
+
 function checkRegistrazioneForm() {
     let valid = true;    
     let form = document.getElementById("regForm");
@@ -44,6 +65,10 @@ function checkRegistrazioneForm() {
     if (!checkConfirmPassword(form.confermaPassword, spanConfermaPassword, form.password))
 		valid = false;
 
+	let spanDataNascita = document.getElementById("errorData");
+	if (!checkDataNascita(form.dataNascita, spanDataNascita))
+		valid = false;
+	
     return valid;
 }
 
