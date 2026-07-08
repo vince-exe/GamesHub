@@ -10,7 +10,7 @@ CREATE TABLE Utente (
     sesso VARCHAR(6),
     email VARCHAR(30) NOT NULL UNIQUE,
     password VARCHAR(20) NOT NULL,
-    ruolo VARCHAR(20) NOT NULL DEFAULT 'Utente',
+    ruolo VARCHAR(20) NOT NULL,
     telefono VARCHAR(13),
     PRIMARY KEY (id)
 );
