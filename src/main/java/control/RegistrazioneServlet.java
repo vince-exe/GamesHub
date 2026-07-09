@@ -35,11 +35,11 @@ public class RegistrazioneServlet extends HttpServlet {
 	    UtenteBean utente = new UtenteBean();
 	    UtenteDao utenteDao = new UtenteDao();
 	    
-	    utente.setEmail(request.getParameter("email"));
+	    utente.setEmail(request.getParameter("email").toLowerCase());
 	    utente.setPassword(request.getParameter("password"));
-	    utente.setNome(request.getParameter("nome"));
-	    utente.setCognome(request.getParameter("cognome"));
-	    utente.setTelefono(request.getParameter("telefono"));
+	    utente.setNome(request.getParameter("nome").toLowerCase());
+	    utente.setCognome(request.getParameter("cognome").toLowerCase());
+	    utente.setTelefono(request.getParameter("cellulare"));
 	    utente.setRuolo("cliente");
 	    utente.setSesso(request.getParameter("genere"));
 	    
@@ -56,6 +56,7 @@ public class RegistrazioneServlet extends HttpServlet {
 	    }
 	    catch(SQLIntegrityConstraintViolationException e) {
 	        request.setAttribute("errore", "Questa email è già utilizzata da un altro utente");
+
 	    }
 	    catch (SQLException e) {
 	        request.setAttribute("errore", "Errore imprevisto sul server");
