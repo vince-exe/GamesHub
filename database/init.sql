@@ -100,4 +100,4 @@ CREATE TABLE RigaOrdine (
 );
 
 -- AMMINISTRATORE --
-INSERT INTO Utente (email, password, nome, cognome, ruolo, telefono, dataNascita, sesso) VALUES ('admin@gmail.com', 'admin', 'mario', 'rossi', 'amministratore', '3393089834', '2005-06-23', 'uomo');
+INSERT INTO Utente (email, password, nome, cognome, ruolo, telefono, dataNascita, sesso) VALUES ('admin@gmail.com', 'amministratore', 'mario', 'rossi', 'amministratore', '3393089834', '2005-06-23', 'uomo');
