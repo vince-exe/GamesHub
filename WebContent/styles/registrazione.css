@@ -39,9 +39,3 @@
 .checkbox-container a:hover {
 	text-decoration: underline;
 }
-
-@media (max-width: 534px) {
-	.form-row {
-		flex-direction: column;
-	}
-}

@@ -123,10 +123,9 @@
 				<%} %>
 			</form>
 			
-			<div class="form-footer">
-				<a href="<%=request.getContextPath()%>/login">Hai già un account? Accedi</a>
+			<div class="form-footer" style="margin-top: 0px;">
+				<h4>Hai già un account? <a href="<%=request.getContextPath()%>/login">Accedi</a></h4>
 			</div>
-
 		</div>
 	</div>
 </body>
