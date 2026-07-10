@@ -33,7 +33,7 @@
 		
 					<div class="input-group">
 						<label for="password">Password</label>
-						<input type="password" id="password" name="password" placeholder="********" maxlength="20" minlength="8" autocomplete="new-password" required
+						<input type="password" id="password" name="password" placeholder="********" maxlength="20" minlength="8" autocomplete="current-password" required
 						onchange="checkPassword(this, document.getElementById('errorPassword'))">
 						
 						<span id="errorPassword" class="error-message"></span>

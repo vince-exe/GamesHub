@@ -97,11 +97,10 @@
 					
 					<div class="input-group">
 						<div class="checkbox-container">
-							<label class="checkbox-label">
-								<input type="checkbox" id="termini" name="termini" required
+							<input type="checkbox" id="termini" name="termini" required
 								onchange="checkTermini(this, document.getElementById('errorTermini'))">
-								<span>Accetto i <a href="#">Termini e Condizioni</a> e l'informativa sulla <a href="#">Privacy</a></span>
-							</label>
+								
+							<span>Accetto i <a href="#">Termini e Condizioni</a> e l'informativa sulla <a href="#">Privacy</a></span>
 						</div>
 						<span id="errorTermini" class="error-message"></span>
 					</div>
