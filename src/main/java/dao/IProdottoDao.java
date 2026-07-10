@@ -9,4 +9,6 @@ public interface IProdottoDao {
 	public List<ProdottoBean> doRetrieveVideogiochi() throws SQLException;
 	
 	public List<ProdottoBean> doRetrieveConsole() throws SQLException;
+	
+	public List<ProdottoBean> doRetrieveAll() throws SQLException;
 }

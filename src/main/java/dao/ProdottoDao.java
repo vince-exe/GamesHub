@@ -85,4 +85,35 @@ public class ProdottoDao implements IProdottoDao {
            }
            return listaConsole;
 	}
+
+	@Override
+	public List<ProdottoBean> doRetrieveAll() throws SQLException {
+		List<ProdottoBean> listaProdotti = new ArrayList<>();
+
+		String query = "SELECT * FROM prodotto";
+
+		
+        try (Connection con = ds.getConnection(); 
+                PreparedStatement ps = con.prepareStatement(query);
+                ResultSet rs = ps.executeQuery()) {
+
+               while (rs.next()) {
+                   ProdottoBean prodotto = new ProdottoBean();
+                   prodotto.setId(rs.getInt("id"));
+                   prodotto.setNome(rs.getString("nome"));
+                   prodotto.setDescrizione(rs.getString("descrizione"));
+                   prodotto.setPrezzo(rs.getBigDecimal("prezzo"));
+                   prodotto.setTipologia(rs.getString("tipologia"));
+                   prodotto.setCasaProduttrice(rs.getString("casaProduttrice"));
+                   prodotto.setDisponibilità(rs.getInt("disponibilità"));
+                   prodotto.setImmagine(rs.getBinaryStream("immagine"));
+                   prodotto.setGenere(rs.getString("genere"));
+                   prodotto.setChiaveAttivazione(rs.getString("chiaveAttivazione"));
+                   prodotto.setPiattaforma(rs.getString("piattaforma"));
+                   
+                   listaProdotti.add(prodotto);
+               }
+           }
+           return listaProdotti;
+	}
 }

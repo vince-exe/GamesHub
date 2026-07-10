@@ -39,9 +39,9 @@ public class LoginServlet extends HttpServlet {
 			if(utente.getPassword().equals(password)) {
 				request.getSession().setAttribute("utente", utente);
 				if(utente.getRuolo().equals("amministratore"))
-					response.sendRedirect("catalogoAdmin");
+					response.sendRedirect(request.getContextPath() + "/catalogoAdmin");
 				else
-					response.sendRedirect("home");
+					response.sendRedirect(request.getContextPath() + "/catalogo");
 			}
 			else {
 				request.setAttribute("errore", "Credenziali errate");
