@@ -1,0 +1,47 @@
+@charset "UTF-8";
+
+select {
+	background-color: #111923;
+	border: 1px solid #2d3748;
+    padding: 12px;
+    border-radius: 5px;
+    color: #ffffff;
+    font-size: 16px;
+    outline: none;
+    transition: border-color 0.3s ease;
+    width: 100%;
+}
+
+select:focus {
+	border-color: #00c3ff;
+}
+
+textarea {
+	background-color: #111923;
+    border: 1px solid #2d3748;
+    padding: 12px;
+    border-radius: 5px;
+    color: #ffffff;
+    font-size: 16px;
+    outline: none;
+    transition: border-color 0.3s ease;
+    resize: none;
+    min-height: 80px;
+    width: 100%;
+}
+
+textarea:focus {
+	border-color: #00c3ff;
+}
+
+.hidden-group {
+	display: none;
+}
+
+/* sovrascrivo il :disabled di default perché non va bene per il mio tema */
+input:disabled, select:disabled {
+    background-color: #0b0f16 !important;
+    border-color: #1f2937 !important; 
+    color: #4a5568 !important;            
+    cursor: not-allowed;               
+}
