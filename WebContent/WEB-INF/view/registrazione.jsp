@@ -14,10 +14,10 @@
 <body>
 	<%@ include file="shared/header.jsp"%>
 	
-	<div class="register-container">
-		<div class="register-card">
+	<div class="form-container">
+		<div class="form-card">
 			
-			<div class="register-header">
+			<div class="form-header">
 				<h2>Crea un account su Games<span>Hub</span></h2>
 			</div>
 
@@ -119,11 +119,11 @@
 					</div>
 				<% }
 				else { %>
-					<button type="submit" class="btn-register">Registrati</button>
+					<button type="submit" class="btn-form">Registrati</button>
 				<%} %>
 			</form>
 			
-			<div class="register-footer">
+			<div class="form-footer">
 				<a href="<%=request.getContextPath()%>/login">Hai già un account? Accedi</a>
 			</div>
 
