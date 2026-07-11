@@ -82,9 +82,6 @@ function checkNomeCognome(formElem, span) {
     if (formElem.validity.valueMissing) {
         span.innerHTML = "Questo campo è obbligatorio";
     } 
-	else if (formElem.validity.tooLong) {
-		span.innerHTML = "La lunghezza massima consentita è di 20 caratteri";
-	} 
 	else if (formElem.validity.tooShort) {
 		span.innerHTML = "La lunghezza minima consentita è di 1 carattere";
     }

@@ -171,7 +171,7 @@ body {
     display: block;
 }
 
-.input-group input.input-error {
+.input-group input.input-error, select.input-error, textarea.input-error {
 	border-color: #ff4757;
     background-color: rgba(255, 71, 87, 0.05);
 }

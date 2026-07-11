@@ -12,6 +12,15 @@ select {
     width: 100%;
 }
 
+select.input-error {
+	background-color: #111923;
+    padding: 12px;
+    border-radius: 5px;
+    color: #ffffff;
+    font-size: 16px;
+    width: 100%;
+}
+
 select:focus {
 	border-color: #00c3ff;
 }
