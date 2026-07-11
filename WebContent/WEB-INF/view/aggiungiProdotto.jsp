@@ -12,6 +12,15 @@
 <body>
 	<%@ include file="shared/header.jsp"%>
 	
+	<% if(request.getAttribute("messaggio") != null) { %>
+	<div class="prodotto-aggiunto">
+		<h4>Complimenti! Il prodotto è stato aggiunto al catalogo</h4>
+		<div class="prodotto-aggiunto-scelta">
+		<h4><a href="<%=request.getContextPath()%>/aggiungiProdotto">Continua</a></h4> oppure <h4><a href="<%=request.getContextPath()%>/catalogoAdmin">Vai al catalogo</a></h4>
+		</div>
+	</div>
+	<%}
+	else { %>
 	<div class="form-container">
 		<div class="form-card">
 			
@@ -96,7 +105,7 @@
 
 				<div class="input-group">
 					<label for="chiaveAttivazione">Chiave di Attivazione</label>
-					<input type="text" id="chiaveAttivazione" name="chiaveAttivazione" placeholder="AAAA-BBBB-CCCC-DDDD" pattern="[A-Za-z]{4}-[A-Za-z]{4}-[A-Za-z]{4}-[A-Za-z]{4}" disabled
+					<input type="text" id="chiaveAttivazione" name="chiaveAttivazione" placeholder="AAAA-BBBB-CCCC-DDDD" maxlength="19" pattern="[A-Za-z]{4}-[A-Za-z]{4}-[A-Za-z]{4}-[A-Za-z]{4}" disabled
 					onchange="checkChiave(this, document.getElementById('errorChiave'))">
 					
 					<span id="errorChiave" class="error-message"></span>
@@ -133,5 +142,6 @@
 			
 		</div>
 	</div>
+	<%} %>
 </body>
 </html>

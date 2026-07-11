@@ -50,7 +50,7 @@ public class ProdottoDao implements IProdottoDao {
                    videogioco.setPiattaforma(rs.getString("piattaforma"));
                    videogioco.setChiaveAttivazione(rs.getString("chiaveAttivazione"));
                    videogioco.setCasaProduttrice(rs.getString("casaProduttrice"));
-                   videogioco.setDisponibilità(rs.getInt("disponibilità"));
+                   videogioco.setDisponibilità(rs.getInt("disponibilita"));
                    videogioco.setImmagine(rs.getBinaryStream("immagine"));
                    
                    videogiochi.add(videogioco);
@@ -77,7 +77,7 @@ public class ProdottoDao implements IProdottoDao {
                    console.setPrezzo(rs.getBigDecimal("prezzo"));
                    console.setTipologia(rs.getString("tipologia"));
                    console.setCasaProduttrice(rs.getString("casaProduttrice"));
-                   console.setDisponibilità(rs.getInt("disponibilità"));
+                   console.setDisponibilità(rs.getInt("disponibilita"));
                    console.setImmagine(rs.getBinaryStream("immagine"));
                    
                    listaConsole.add(console);
@@ -105,7 +105,7 @@ public class ProdottoDao implements IProdottoDao {
                    prodotto.setPrezzo(rs.getBigDecimal("prezzo"));
                    prodotto.setTipologia(rs.getString("tipologia"));
                    prodotto.setCasaProduttrice(rs.getString("casaProduttrice"));
-                   prodotto.setDisponibilità(rs.getInt("disponibilità"));
+                   prodotto.setDisponibilità(rs.getInt("disponibilita"));
                    prodotto.setImmagine(rs.getBinaryStream("immagine"));
                    prodotto.setGenere(rs.getString("genere"));
                    prodotto.setChiaveAttivazione(rs.getString("chiaveAttivazione"));
@@ -115,5 +115,36 @@ public class ProdottoDao implements IProdottoDao {
                }
            }
            return listaProdotti;
+	}
+
+	@Override
+	public void doSave(ProdottoBean prodotto) throws SQLException {
+	    String query = "INSERT INTO Prodotto (nome, descrizione, prezzo, immagine, disponibilita, tipologia, genere, piattaforma, chiaveAttivazione, casaProduttrice) "
+	                 + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
+	    try (Connection con = ds.getConnection();
+	         PreparedStatement ps = con.prepareStatement(query)) {
+	        
+	        ps.setString(1, prodotto.getNome());
+	        ps.setString(2, prodotto.getDescrizione());
+	        ps.setBigDecimal(3, prodotto.getPrezzo());
+	        
+	        if (prodotto.getImmagine() != null) {
+	            ps.setBinaryStream(4, prodotto.getImmagine());
+	        } else {
+	            ps.setNull(4, java.sql.Types.BLOB);
+	        }
+	        
+	        ps.setInt(5, prodotto.getDisponibilità());
+	        ps.setString(6, prodotto.getTipologia());
+	        
+	        // questi sono campi opzionali in base alla tipologia del prodotto
+	        ps.setString(7, prodotto.getGenere());
+	        ps.setString(8, prodotto.getPiattaforma());
+	        ps.setString(9, prodotto.getChiaveAttivazione());
+	        ps.setString(10, prodotto.getCasaProduttrice());
+
+	        ps.executeUpdate();
+	    }
 	}
 }

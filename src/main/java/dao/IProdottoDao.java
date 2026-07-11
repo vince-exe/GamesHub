@@ -11,4 +11,6 @@ public interface IProdottoDao {
 	public List<ProdottoBean> doRetrieveConsole() throws SQLException;
 	
 	public List<ProdottoBean> doRetrieveAll() throws SQLException;
-}
+	
+	public void doSave(ProdottoBean prodotto) throws SQLException;
+} 

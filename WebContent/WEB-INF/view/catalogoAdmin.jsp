@@ -15,7 +15,7 @@
 	
 	<% java.util.List<ProdottoBean> catalogo = (java.util.List<ProdottoBean>) request.getAttribute("catalogo");
 		
-		if(catalogo.size() == 0) { %>
+		if(catalogo == null || catalogo.size() == 0) { %>
 		<div class="box-catalogo-vuoto">
 			<h4>Il catalogo è vuoto</h4>
 			<h5><a href="<%=request.getContextPath()%>/aggiungiProdotto">Clicca qui</a> per aggiungere un prodotto</h5>
