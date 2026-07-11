@@ -14,7 +14,7 @@ import java.util.List;
 import dao.ProdottoDao;
 
 @WebServlet("/catalogoAdmin")
-public class CatalogoAdmin extends HttpServlet {
+public class CatalogoAdminServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
