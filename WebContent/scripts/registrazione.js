@@ -11,7 +11,7 @@ function checkCellulare(formElem, span) {
         span.innerHTML = "Questo campo è obbligatorio";
     } 
 	else if (formElem.validity.patternMismatch) {
-    	span.innerHTML = "Inserisci un numero di cellulare valido (9-10 cifre, solo numeri)";
+    	span.innerHTML = "Inserisci un numero di cellulare valido (10 cifre, solo numeri)";
     }
 	
     return false;

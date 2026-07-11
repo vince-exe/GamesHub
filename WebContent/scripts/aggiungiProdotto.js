@@ -37,13 +37,13 @@ function handleTipologiaChange(selectElement) {
 }
 
 function checkTipologia(formElem, span) {
+	if (formElem.value === "") {
+	    formElem.classList.add("input-error");
+	    span.innerHTML = "Questo campo è obbligatorio";
+	    return false;
+	}
+	
     handleTipologiaChange(formElem);
-    
-    if (formElem.value === "") {
-        formElem.classList.add("input-error");
-        span.innerHTML = "Questo campo è obbligatorio";
-        return false;
-    }
     
     formElem.classList.remove("input-error");
     span.innerHTML = "";
