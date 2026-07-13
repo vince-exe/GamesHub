@@ -17,7 +17,11 @@
 		if(prodotto != null) {
 	%>
 		<div class="dettaglio-prodotto-container">
-			<div class="contenitore-immagine"></div>
+			<div class="contenitore-immagine">
+				<img src="${pageContext.request.contextPath}/visualizzaImmagine?id=<%= prodotto.getId() %>" 
+				 	alt="Copertina <%= prodotto.getNome() %>" 
+					class="immagine-dettaglio">
+			</div>
 			
 			<div class="form-container">
 				<div class="form-card">
