@@ -13,4 +13,6 @@ public interface IProdottoDao {
 	public List<ProdottoBean> doRetrieveAll() throws SQLException;
 	
 	public void doSave(ProdottoBean prodotto) throws SQLException;
+	
+	public void doDelete(int idProdotto) throws SQLException;
 } 

@@ -147,4 +147,16 @@ public class ProdottoDao implements IProdottoDao {
 	        ps.executeUpdate();
 	    }
 	}
+
+	@Override
+	public void doDelete(int idProdotto) throws SQLException {
+		String query = "DELETE FROM Prodotto WHERE id = ?";
+		
+	    try (Connection con = ds.getConnection();
+		         PreparedStatement ps = con.prepareStatement(query)) {
+	    	
+	    	ps.setInt(1, idProdotto);
+	    	ps.executeUpdate();
+		}
+	}
 }
