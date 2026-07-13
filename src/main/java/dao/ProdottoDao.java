@@ -110,7 +110,7 @@ public class ProdottoDao implements IProdottoDao {
                    prodotto.setGenere(rs.getString("genere"));
                    prodotto.setChiaveAttivazione(rs.getString("chiaveAttivazione"));
                    prodotto.setPiattaforma(rs.getString("piattaforma"));
-                   
+                
                    listaProdotti.add(prodotto);
                }
            }

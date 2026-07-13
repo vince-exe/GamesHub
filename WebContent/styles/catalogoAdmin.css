@@ -28,3 +28,91 @@
 	cursor: pointer;
 	text-decoration: underline;
 }
+
+.container-catalogo {
+	display: flex;
+	flex-direction: column;
+	justify-content: start;
+    padding: 25px;
+    color: #fff;
+    gap: 10px;
+}
+
+.azioni-top {
+    margin-bottom: 20px;
+}
+
+.btn-aggiungi {
+	display: inline-block;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 4px;
+    font-weight: 600;
+    background-color: #00d2ff;
+   	color: #121824;
+}
+
+.btn-aggiungi:hover {
+    background-color: #00b4db;
+}
+
+.tabella-prodotti {
+    width: 100%;
+    background-color: #1e2530;
+    border-collapse: collapse;
+    color: #fff;
+}
+
+.tabella-prodotti th, .tabella-prodotti td {
+    padding: 12px 10px;
+    text-align: left;
+}
+
+.tabella-prodotti th {
+    background-color: #151a23;
+    color: #00D2FF;
+    text-transform: uppercase;
+    font-size: 13px;
+}
+
+.tabella-prodotti tr:hover {
+    background-color: #252e3c;
+}
+
+.container-azioni {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
+}
+
+.azione {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+}
+
+.azione-visualizza { background-color: #00bcd4; }
+.azione-visualizza:hover { background-color: #0090A3; }
+
+.azione-rimuovi { background-color: #f44336; }
+.azione-rimuovi:hover { background-color: #F21C0D; }
+
+.azione-modifica { background-color: #4caf50; }
+.azione-modifica:hover { background-color: #409142; }
+
+@media screen and (max-width: 1200px) {
+	.container-catalogo {
+        overflow-x: auto;
+    }
+    
+    .tabella-prodotti {
+    	/* Questa proprietà mi assegna ad ogni td la width basata sul contenuto che occupa */
+        table-layout: fixed; 
+        width: 1300px;
+    }
+}

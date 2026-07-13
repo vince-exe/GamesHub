@@ -105,7 +105,6 @@ body {
     vertical-align: middle;
 }
 
-/* HAMBURGER MENU */
 @media screen and (max-width: 862px) {
     .header-container {
         position: relative;
