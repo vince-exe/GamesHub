@@ -49,7 +49,7 @@
             <tbody>
                 <% for(ProdottoBean prodotto : catalogo) { %>
                     <tr>
-                        <td><strong><%= prodotto.getNome() %></strong></td>
+                        <td class="cella-nome"><strong><%= prodotto.getNome() %></strong></td>
                         <td><%= prodotto.getTipologia() %></td>
                         <td><%= prodotto.getGenere() != null ? prodotto.getGenere() : "-" %></td>
                         <td><%= prodotto.getPiattaforma() != null ? prodotto.getPiattaforma() : "-" %></td>

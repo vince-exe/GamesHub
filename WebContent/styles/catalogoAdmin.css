@@ -61,6 +61,24 @@
     background-color: #1e2530;
     border-collapse: collapse;
     color: #fff;
+    table-layout: fixed;
+}
+
+.tabella-prodotti th:nth-child(1) { width: 10%; }  /* Nome */
+.tabella-prodotti th:nth-child(2) { width: 10%; }  /* Tipologia */
+.tabella-prodotti th:nth-child(3) { width: 15%; }  /* Genere */
+.tabella-prodotti th:nth-child(4) { width: 10%; }  /* Piattaforma */
+.tabella-prodotti th:nth-child(5) { width: 12%; }  /* Produttore */
+.tabella-prodotti th:nth-child(6) { width: 8%; }   /* Prezzo */
+.tabella-prodotti th:nth-child(7) { width: 10%; }   /* Disponibilità */
+.tabella-prodotti th:nth-child(8) { width: 15%; }   /* Chiave */
+.tabella-prodotti th:nth-child(9) { width: 10%; }  /* Azioni */
+
+/* mi serve per gestire lunghezze troppo lunghe, in tal caso mi taglia il contenuto e mi aggiunge i 3 puntini */
+
+.tabella-prodotti td {
+	overflow: hidden;
+	text-overflow: ellipsis;
 }
 
 .tabella-prodotti th, .tabella-prodotti td {
@@ -90,7 +108,7 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    padding: 8px;
+    padding: 5px;
     border-radius: 6px;
     cursor: pointer;
     transition: all 0.2s ease-in-out;
@@ -111,8 +129,6 @@
     }
     
     .tabella-prodotti {
-    	/* Questa proprietà mi assegna ad ogni td la width basata sul contenuto che occupa */
-        table-layout: fixed; 
         width: 1300px;
     }
 }
