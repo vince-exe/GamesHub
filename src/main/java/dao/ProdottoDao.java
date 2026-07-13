@@ -159,4 +159,55 @@ public class ProdottoDao implements IProdottoDao {
 	    	ps.executeUpdate();
 		}
 	}
+
+	@Override
+	public ProdottoBean doRetrieveById(int id) throws SQLException {
+		ProdottoBean prodotto = null;
+		String query = "SELECT * FROM Prodotto WHERE id = ?";
+		
+	    try (Connection con = ds.getConnection();
+	    	 PreparedStatement ps = con.prepareStatement(query)) {
+	  
+	    	 ps.setInt(1, id);
+	    		
+	    	 try(ResultSet rs = ps.executeQuery()) {
+	    		 if(rs.next()) {
+		    		 prodotto = new ProdottoBean();
+		    		 prodotto.setId(rs.getInt("id"));
+		    		 prodotto.setNome(rs.getString("nome"));
+		    		 prodotto.setDescrizione(rs.getString("descrizione"));
+		    		 prodotto.setPrezzo(rs.getBigDecimal("prezzo"));
+		    		 prodotto.setTipologia(rs.getString("tipologia"));
+		    		 prodotto.setCasaProduttrice(rs.getString("casaProduttrice"));
+		    		 prodotto.setDisponibilità(rs.getInt("disponibilita"));
+		    		 prodotto.setImmagine(rs.getBinaryStream("immagine"));
+		    		 prodotto.setGenere(rs.getString("genere"));
+		    		 prodotto.setChiaveAttivazione(rs.getString("chiaveAttivazione"));
+		    		 prodotto.setPiattaforma(rs.getString("piattaforma"));
+	    		 }
+
+	    	}
+	    }
+	    
+	    return prodotto;
+	}
+
+	@Override
+	public byte[] getImmagineById(int id) throws SQLException {
+	    byte[] immagine = null;
+	    String query = "SELECT immagine FROM Prodotto WHERE id = ?";
+	   
+	    try (Connection con = ds.getConnection();
+	         PreparedStatement ps = con.prepareStatement(query)) {
+	    	
+	        ps.setInt(1, id);
+	        
+	        try (ResultSet rs = ps.executeQuery()) {
+	            if (rs.next()) {
+	                immagine = rs.getBytes("immagine");
+	            }
+	        }
+	    }
+	    return immagine;
+	}
 }

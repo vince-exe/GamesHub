@@ -12,6 +12,10 @@ public interface IProdottoDao {
 	
 	public List<ProdottoBean> doRetrieveAll() throws SQLException;
 	
+	public ProdottoBean doRetrieveById(int id) throws SQLException;
+	
+	public byte[] getImmagineById(int id) throws SQLException;
+	
 	public void doSave(ProdottoBean prodotto) throws SQLException;
 	
 	public void doDelete(int idProdotto) throws SQLException;

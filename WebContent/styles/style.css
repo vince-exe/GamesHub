@@ -25,7 +25,6 @@ body {
 	max-width: 500px; 
 	padding: 40px 30px;
 	border-radius: 8px;
-	box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
 	display: flex;
 	flex-direction: column;
 	gap: 20px;
@@ -155,6 +154,24 @@ body {
 .form-footer a:hover {
 	cursor: pointer;
 	text-decoration: underline;
+}
+
+textarea {
+	background-color: #111923;
+    border: 1px solid #2d3748;
+    padding: 12px;
+    border-radius: 5px;
+    color: #ffffff;
+    font-size: 16px;
+    outline: none;
+    transition: border-color 0.3s ease;
+    resize: none;
+    min-height: 80px;
+    width: 100%;
+}
+
+textarea:focus {
+	border-color: #00c3ff;
 }
 
 @media (max-width: 534px) {
