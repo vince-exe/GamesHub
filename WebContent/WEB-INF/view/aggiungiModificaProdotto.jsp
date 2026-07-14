@@ -17,7 +17,6 @@
 	<%
 		ProdottoBean prodotto = (ProdottoBean) request.getAttribute("prodotto");
 		
-		// Variabili di appoggio per evitare NullPointerException nei value
 		String nomeVal = (prodotto != null) ? prodotto.getNome() : "";
 		String casaVal = (prodotto != null) ? prodotto.getCasaProduttrice() : "";
 		BigDecimal prezzoVal = (prodotto != null) ? prodotto.getPrezzo() : BigDecimal.ZERO;
