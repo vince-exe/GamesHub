@@ -18,10 +18,27 @@ public class CatalogoAdminServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String filtro = request.getParameter("filtro");
+		if(filtro == null)
+			filtro = "tutti";
+		
 		ProdottoDao prodottoDao = new ProdottoDao();
+		List<ProdottoBean> prodotti = null;
 		
 		try {
-			List<ProdottoBean> prodotti = prodottoDao.doRetrieveAll();
+			switch(filtro) {
+			case "console":
+				prodotti = prodottoDao.doRetrieveOnTipologia("console");
+				break;
+				
+			case "videogioco":
+				prodotti = prodottoDao.doRetrieveOnTipologia("videogioco");
+				break;
+			
+			default: // tutti
+				prodotti = prodottoDao.doRetrieveAll();
+				break;
+			}			
 			request.setAttribute("catalogo", prodotti);
 			
 		} catch (SQLException e) {

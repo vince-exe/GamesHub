@@ -8,7 +8,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>GamesHub - AggiungiProdotto</title>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/styles/style.css"/>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/styles/aggiungiProdotto.css"/>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/styles/aggiungiModificaProdotto.css"/>
 <script src="${pageContext.request.contextPath}/scripts/aggiungiProdotto.js"></script>
 </head>
 <body>

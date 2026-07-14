@@ -5,12 +5,10 @@ import java.util.List;
 
 import model.ProdottoBean;
 
-public interface IProdottoDao {
-	public List<ProdottoBean> doRetrieveVideogiochi() throws SQLException;
-	
-	public List<ProdottoBean> doRetrieveConsole() throws SQLException;
-	
+public interface IProdottoDao {	
 	public List<ProdottoBean> doRetrieveAll() throws SQLException;
+	
+	public List<ProdottoBean> doRetrieveOnTipologia(String tipologia) throws SQLException;
 	
 	public ProdottoBean doRetrieveById(int id) throws SQLException;
 	

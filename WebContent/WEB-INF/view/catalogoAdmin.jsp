@@ -30,6 +30,26 @@
             <a href="<%=request.getContextPath()%>/aggiungiModificaProdotto" class="btn-aggiungi">
                 + Aggiungi Nuovo Prodotto
             </a>
+            
+            <div class="filtro-container">
+				<form action="<%= request.getContextPath() %>/catalogoAdmin" method="GET" class="filtro-form">
+				        <label for="filtroTipologia">Filtra per:</label>
+				        
+				        <%String filtroAttivo = request.getParameter("filtro"); 
+				          if (filtroAttivo == null) {
+				          	filtroAttivo = "tutti";
+				          }
+				        %>
+				        
+				        <select id="filtroTipologia" name="filtro">
+				            <option value="tutti" <%= "tutti".equals(filtroAttivo) ? "selected" : "" %>>Tutti i prodotti</option>
+				            <option value="videogioco" <%= "videogioco".equals(filtroAttivo) ? "selected" : "" %>>Videogiochi</option>
+				            <option value="console" <%= "console".equals(filtroAttivo) ? "selected" : "" %>>Console</option>
+				        </select>
+				        
+				        <button type="submit" class="btn-aggiungi btn-filtra">Applica</button>
+				    </form>
+		    </div>
         </div>
 
         <table class="tabella-prodotti">
