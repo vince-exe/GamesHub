@@ -21,7 +21,7 @@
 
 .prodotto-aggiunto-scelta {
 	display: flex;
-	flex-direction: row;
+	flex-direction: column;
 	gap: 7px;
 }
 

@@ -15,21 +15,44 @@ import java.sql.SQLIntegrityConstraintViolationException;
 
 import dao.ProdottoDao;
 
-@WebServlet("/aggiungiProdotto")
+@WebServlet("/aggiungiModificaProdotto")
 @MultipartConfig // perché nel frontend utilizzo multipart/form-data
-public class AggiungiProdottoServlet extends HttpServlet {
+public class AggiungiModificaProdottoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("/WEB-INF/view/aggiungiProdotto.jsp").forward(request, response);
+		String idProdottoStr = request.getParameter("id");
+		
+		if(idProdottoStr == null) { // aggiungi il prodotto
+			request.getRequestDispatcher("/WEB-INF/view/aggiungiModificaProdotto.jsp").forward(request, response);
+			return;
+		}
+		// modifica prodotto
+		ProdottoDao prodottoDao = new ProdottoDao();
+		try {
+			request.setAttribute("prodotto", prodottoDao.doRetrieveById(Integer.parseInt(idProdottoStr)));
+		}
+		catch (SQLException e) {
+			request.setAttribute("errore", "impossibile recuperare il prodotto da modificare");
+			e.printStackTrace();
+		}
+		finally {
+			request.getRequestDispatcher("/WEB-INF/view/aggiungiModificaProdotto.jsp").forward(request, response);
+		}
 	}
-
+	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String idProdottoStr = request.getParameter("id");
+		int idProdotto = (idProdottoStr != null) ? Integer.parseInt(idProdottoStr) : 0;
+		
 		ProdottoDao prodottoDao = new ProdottoDao();
 		
         try {
         	ProdottoBean prodotto = new ProdottoBean();
-                    
+            
+        	if(idProdottoStr != null)
+        		prodotto.setId(idProdotto);
+        	
             prodotto.setNome(request.getParameter("nome").toLowerCase());
             prodotto.setDescrizione(request.getParameter("descrizione").toLowerCase());
             prodotto.setCasaProduttrice(request.getParameter("casaProduttrice").toLowerCase());
@@ -53,15 +76,28 @@ public class AggiungiProdottoServlet extends HttpServlet {
                 prodotto.setImmagine(filePart.getInputStream());
             }
 
-            prodottoDao.doSave(prodotto);
-            request.setAttribute("messaggio", "Prodotto salvato correttamente");
+            if(idProdottoStr != null) {
+            	request.setAttribute("prodotto", prodotto);
+            	prodottoDao.doUpdate(prodotto);
+            }
+            else
+            	prodottoDao.doSave(prodotto);
+            
+            if(idProdottoStr != null)
+            	request.setAttribute("messaggio", "Prodotto modificato correttamente");
+            else
+            	request.setAttribute("messaggio", "Prodotto aggiunto correttamente");
         }
         catch (SQLException e) {
-            e.printStackTrace();
-            request.setAttribute("errore", "Errore nel salvataggio del prodotto sul Database");
+        	e.printStackTrace();
+            if(idProdottoStr != null) {
+                request.setAttribute("errore", "Errore nell'aggiornamento del prodotto sul Database");
+            } else {
+                request.setAttribute("errore", "Errore nell'inserimento del prodotto nel Database"); 
+            }
         } 
         finally {
-        	request.getRequestDispatcher("/WEB-INF/view/aggiungiProdotto.jsp").forward(request, response);
+            request.getRequestDispatcher("/WEB-INF/view/aggiungiModificaProdotto.jsp").forward(request, response);
         }
     }
 

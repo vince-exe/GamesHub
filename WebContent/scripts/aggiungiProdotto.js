@@ -72,7 +72,7 @@ function checkChiave(formElem, span) {
 }
 
 function checkInput(formElem, span, minlen) {
-	if(formElem.disabled) // controllo specifico nel caso sia 'genere'
+	if(formElem.disabled) // controllo specifico nel caso sia 'genere' perché lui può essere nullo se la tipologia è 'piattaforma'
 		return true;
 		
     if (formElem.checkValidity()) {

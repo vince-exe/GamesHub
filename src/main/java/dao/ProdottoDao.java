@@ -128,13 +128,7 @@ public class ProdottoDao implements IProdottoDao {
 	        ps.setString(1, prodotto.getNome());
 	        ps.setString(2, prodotto.getDescrizione());
 	        ps.setBigDecimal(3, prodotto.getPrezzo());
-	        
-	        if (prodotto.getImmagine() != null) {
-	            ps.setBinaryStream(4, prodotto.getImmagine());
-	        } else {
-	            ps.setNull(4, java.sql.Types.BLOB);
-	        }
-	        
+	        ps.setBinaryStream(4, prodotto.getImmagine());
 	        ps.setInt(5, prodotto.getDisponibilità());
 	        ps.setString(6, prodotto.getTipologia());
 	        
@@ -209,5 +203,36 @@ public class ProdottoDao implements IProdottoDao {
 	        }
 	    }
 	    return immagine;
+	}
+
+	@Override
+	public void doUpdate(ProdottoBean prodotto) throws SQLException {
+		boolean hasToUpdateImmagine = (prodotto.getImmagine() != null);
+		String query = hasToUpdateImmagine 
+			    ? "UPDATE Prodotto SET nome=?, descrizione=?, prezzo=?, immagine=?, disponibilita=?, tipologia=?, genere=?, piattaforma=?, chiaveAttivazione=?, casaProduttrice=? WHERE id=?"
+			    : "UPDATE Prodotto SET nome=?, descrizione=?, prezzo=?, disponibilita=?, tipologia=?, genere=?, piattaforma=?, chiaveAttivazione=?, casaProduttrice=? WHERE id=?";
+
+		try (Connection con = ds.getConnection();
+			     PreparedStatement ps = con.prepareStatement(query)) {
+			    
+			    int index = 1;
+			    ps.setString(index++, prodotto.getNome());
+			    ps.setString(index++, prodotto.getDescrizione());
+			    ps.setBigDecimal(index++, prodotto.getPrezzo());
+			    
+			    if (hasToUpdateImmagine) {
+			        ps.setBinaryStream(index++, prodotto.getImmagine());
+			    }
+			    
+			    ps.setInt(index++, prodotto.getDisponibilità());
+			    ps.setString(index++, prodotto.getTipologia());
+			    ps.setString(index++, prodotto.getGenere());
+			    ps.setString(index++, prodotto.getPiattaforma());
+			    ps.setString(index++, prodotto.getChiaveAttivazione());
+			    ps.setString(index++, prodotto.getCasaProduttrice());
+			    ps.setInt(index++, prodotto.getId());
+			    
+			    ps.executeUpdate();
+			}
 	}
 }

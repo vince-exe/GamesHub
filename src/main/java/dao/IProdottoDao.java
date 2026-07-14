@@ -19,4 +19,6 @@ public interface IProdottoDao {
 	public void doSave(ProdottoBean prodotto) throws SQLException;
 	
 	public void doDelete(int idProdotto) throws SQLException;
+	
+	public void doUpdate(ProdottoBean prodotto) throws SQLException;
 } 
