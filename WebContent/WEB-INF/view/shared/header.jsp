@@ -11,7 +11,7 @@
         </div>
 		
 		<ul class="nav-menu">
-			<%if(utente != null && !utente.getRuolo().equals("amministratore")){ %>
+			<%if(utente == null || !utente.getRuolo().equals("amministratore")){ %>
 				<li><a href="<%=request.getContextPath()%>/home" class="nav-link">Home</a>
 	            <li><a href="<%=request.getContextPath()%>/catalogo" class="nav-link">Catalogo</a></li>
 	            <li><a href="#" class="nav-link">F.A.Q</a></li>
@@ -33,7 +33,7 @@
                 	<%} %>
                 </span>
             </a>
-            <%if(utente != null && !utente.getRuolo().equals("amministratore")){ %>
+            <%if(utente == null || !utente.getRuolo().equals("amministratore")){ %>
 	            <a href="#" class="action-link cart-btn">
 	                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
 	                    <circle cx="9" cy="21" r="1"></circle>

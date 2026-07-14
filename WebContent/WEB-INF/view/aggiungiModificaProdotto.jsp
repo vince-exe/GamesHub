@@ -9,7 +9,7 @@
 <title>GamesHub - AggiungiProdotto</title>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/styles/style.css"/>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/styles/aggiungiModificaProdotto.css"/>
-<script src="${pageContext.request.contextPath}/scripts/aggiungiProdotto.js"></script>
+<script src="${pageContext.request.contextPath}/scripts/aggiungiModificaProdotto.js"></script>
 </head>
 <body>
 	<%@ include file="shared/header.jsp"%>
