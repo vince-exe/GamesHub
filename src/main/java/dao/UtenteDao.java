@@ -63,6 +63,7 @@ public class UtenteDao implements IUtenteDao {
 		
 		try(Connection conn = this.ds.getConnection();
 			PreparedStatement ps = conn.prepareStatement(query)) {
+			
 			ps.setString(1, utente.getEmail());
 			ps.setString(2, utente.getPassword());
 			ps.setString(3, utente.getNome());
@@ -75,5 +76,37 @@ public class UtenteDao implements IUtenteDao {
 			ps.executeUpdate();
 		}	
 	}
+	
+	public void doUpdate(UtenteBean utente, String nuovaPassword) throws SQLException {
+        boolean updatePassword = (nuovaPassword != null && !nuovaPassword.isEmpty());        
+        String query = "UPDATE utente SET nome = ?, cognome = ?, email = ?, telefono = ?, dataNascita = ?, sesso = ?";
+        
+        if (updatePassword)
+        	query += ", password = ?";
+        
+        query += " WHERE id = ?";
 
+		try(Connection conn = this.ds.getConnection();
+				PreparedStatement ps = conn.prepareStatement(query)) {
+			
+            ps.setString(1, utente.getNome());
+            ps.setString(2, utente.getCognome());
+            ps.setString(3, utente.getEmail());
+            ps.setString(4, utente.getTelefono());
+            
+            ps.setTimestamp(5, utente.getDataNascita());
+            ps.setString(6, utente.getSesso());
+
+            if (updatePassword) {
+            	ps.setString(7, nuovaPassword);
+            	ps.setInt(8, utente.getId());
+            } 
+            else {
+            	ps.setInt(7, utente.getId());
+            }
+            
+            ps.executeUpdate();
+        }
+		
+    }
 }

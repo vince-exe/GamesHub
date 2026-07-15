@@ -11,7 +11,7 @@
         </div>
 		
 		<ul class="nav-menu">
-			<%if(utente == null || !utente.getRuolo().equals("amministratore")){ %>
+			<%if(utente == null || !"amministratore".equals(utente.getRuolo())){ %>
 				<li><a href="<%=request.getContextPath()%>/home" class="nav-link">Home</a>
 	            <li><a href="<%=request.getContextPath()%>/catalogo" class="nav-link">Catalogo</a></li>
 	            <li><a href="#" class="nav-link">F.A.Q</a></li>
