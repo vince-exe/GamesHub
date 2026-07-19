@@ -11,83 +11,52 @@ body {
 	background-color: #1E232B;
 }
 
-/* CONTAINER PRINCIPALE */
 .main-container {
     display: flex;
     flex-direction: column;
     width: 100%;
 }
 
-/* HERO SECTION CON VIDEO */
-.hero-section {
-    position: relative;
+.main-section {
+	display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    background: rgba(18, 24, 36, 0.75);
     width: 100%;
     height: 70vh;
-    min-height: 400px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     overflow: hidden;
 }
 
-.hero-video {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 100%;
-    height: 100%;
-    transform: translate(-50%, -50%);
-    z-index: 1;
-    pointer-events: none;
-}
-
-/* overlay tra video e testo per far leggere meglio all'utente il testo scritto */
-.video-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(18, 24, 36, 0.75);
-    z-index: 2;
-}
-
-.hero-content {
-    position: relative;
-    z-index: 3;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    padding: 0 20px;
-    max-width: 800px;
-}
-
-.hero-title {
+.main-title {
     font-size: 2.8rem;
     font-weight: 800;
     letter-spacing: 2px;
     margin-bottom: 15px;
     text-transform: uppercase;
   	color: #FFFFFF;
+  	text-align: center;
 }
 
-.hero-title .highlight {
+.main-title .highlight {
     color: #00D2FF;
 }
 
-.hero-subtitle {
+.main-subtitle {
     font-size: 1.2rem;
     color: #CBD5E1;
     line-height: 1.6;
     margin-bottom: 30px;
+    text-align: center;
 }
 
-.hero-buttons {
+.main-buttons {
     display: flex;
-    gap: 15px;
-    flex-wrap: wrap;
+    width: 100%;
     justify-content: center;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 15px;
 }
 
 .btn {

@@ -14,28 +14,17 @@
 	<%@ include file="shared/header.jsp"%>
 	
 	<div class="main-container">
-	    <section class="hero-section">
-			<iframe class="hero-video" 
-			        src="https://www.youtube.com/embed/inBgIhylG7s?autoplay=1&mute=1&loop=1&playlist=inBgIhylG7s&controls=0&showinfo=0&rel=0&modestbranding=1" 
-			        allow="autoplay; encrypted-media"
-			        allowfullscreen>
-			</iframe>
+	    <section class="main-section">
+	    	<h1 class="main-title">BENVENUTO SU GAMES<span class="highlight">HUB</span></h1>
+	        <p class="main-subtitle">Il tuo portale per videogiochi e console ai prezzi più bassi del web.<br>- By gamers for gamers.</p>
 	        
-	        <div class="video-overlay"></div>
-	        
-	        <div class="hero-content">
-	            <h1 class="hero-title">BENVENUTO SU GAMES<span class="highlight">HUB</span></h1>
-	            <p class="hero-subtitle">Il tuo portale per videogiochi e console ai prezzi più bassi del web.<br>
-	            - By gamers for gamers.
-	            </p>
-	            <div class="hero-buttons">
-	                <a href="<%=request.getContextPath()%>/videogiochi" class="btn btn-primary">Sfoglia Videogiochi</a>
-	                <a href="<%=request.getContextPath()%>/console" class="btn btn-secondary">Scopri Console</a>
-	            </div>
+	        <div class="main-buttons">
+	        	<a href="<%=request.getContextPath()%>/videogiochi" class="btn btn-primary">Sfoglia Videogiochi</a>
+	            <a href="<%=request.getContextPath()%>/console" class="btn btn-secondary">Scopri Console</a>
 	        </div>
 	    </section>
 		
-	    <section id="scopri-di-piu" class="features-section">
+	    <section class="features-section">
 	        <div class="feature-card">
 	            <h3>Consegna Istantanea</h3>
 	            <p>Ricevi la tua chiave digitale immediatamente subito dopo l'acquisto, 24/7.</p>
