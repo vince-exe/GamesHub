@@ -8,7 +8,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/styles/style.css"/>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/styles/catalogoAdmin.css"/>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/styles/catalogo.css"/>
 <title>GamesHub - CatalogoAmministratore</title>
 </head>
 <body>
@@ -45,7 +45,7 @@
             <%} %>
             
             <div class="filtro-container">
-				<form action="<%= request.getContextPath() %>/catalogoAdmin" method="GET" class="filtro-form">
+				<form action="<%= request.getContextPath() %>/catalogo" method="GET" class="filtro-form">
 				        <label for="filtroTipologia">Filtra per:</label>
 				        
 				        <%String filtroAttivo = request.getParameter("filtro"); 

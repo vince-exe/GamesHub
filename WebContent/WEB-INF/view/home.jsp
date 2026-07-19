@@ -19,8 +19,8 @@
 	        <p class="main-subtitle">Il tuo portale per videogiochi e console ai prezzi più bassi del web.<br>- By gamers for gamers.</p>
 	        
 	        <div class="main-buttons">
-	        	<a href="<%=request.getContextPath()%>/videogiochi" class="btn btn-primary">Sfoglia Videogiochi</a>
-	            <a href="<%=request.getContextPath()%>/console" class="btn btn-secondary">Scopri Console</a>
+	        	<a href="<%=request.getContextPath()%>/catalogo?filtro=videogioco" class="btn btn-primary">Sfoglia Videogiochi</a>
+	            <a href="<%=request.getContextPath()%>/catalogo?filtro=console" class="btn btn-secondary">Scopri Console</a>
 	        </div>
 	    </section>
 		
