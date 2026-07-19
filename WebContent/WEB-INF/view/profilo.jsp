@@ -7,6 +7,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/styles/style.css"/>
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/styles/profilo.css"/>
 	<script src="${pageContext.request.contextPath}/scripts/auth.js"></script>
 	<script src="${pageContext.request.contextPath}/scripts/registrazione.js"></script>
 	<script src="${pageContext.request.contextPath}/scripts/profilo.js"></script>
@@ -139,7 +140,9 @@
 
                 <button type="submit" class="btn-form">Salva Modifiche</button>
             </form>
-
+            	<h4 class="oppure">oppure</h4>
+				<a href="${pageContext.request.contextPath}/logout" class="btn-form btn-logout">disconnessione</a>
+				
             <div class="form-footer">
                 <a href="${pageContext.request.contextPath}/catalogo">Torna al catalogo</a>
             </div>

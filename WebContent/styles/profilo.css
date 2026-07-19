@@ -1,0 +1,19 @@
+@charset "UTF-8";
+
+.oppure {
+	margin: 0;
+	padding: 0;
+	text-align: center;
+	color: #fff;
+}
+
+.btn-logout {
+	text-align: center;
+	margin: 0px;
+	color: #fff;
+	background-color: #b23b3b;
+}
+
+.btn-logout:hover {
+	background-color: #6b1d1d !important;
+}
