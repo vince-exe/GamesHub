@@ -10,12 +10,20 @@
         	<span class="logo-text">GAMES<span class="accent-text">HUB</span></span>
         </div>
 		
+		<div class="hamburger" id="hamburgerBtn">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </div>
+        
 		<ul class="nav-menu">
-			<%if(utente == null || !"amministratore".equals(utente.getRuolo())){ %>
-				<li><a href="<%=request.getContextPath()%>/home" class="nav-link">Home</a>
-	            <li><a href="<%=request.getContextPath()%>/catalogo" class="nav-link">Catalogo</a></li>
-	            <li><a href="#" class="nav-link">F.A.Q</a></li>
+			<li><a href="<%=request.getContextPath()%>/home" class="nav-link">Home</a></li>
+			<%if(utente != null && "amministratore".equals(utente.getRuolo())) {%>
+	        	<li><a href="<%=request.getContextPath()%>/catalogoAdmin" class="nav-link">Catalogo Amministratore</a></li>
+	        <%} else { %>
+	        	<li><a href="<%=request.getContextPath()%>/catalogo" class="nav-link">Catalogo</a></li>
 	        <%} %>
+	        <li><a href="#" class="nav-link">F.A.Q</a></li>
         </ul>
 		
         <div class="user-actions">
@@ -47,3 +55,4 @@
         
     </div>
 </header>
+<script src="${pageContext.request.contextPath}/scripts/header.js"></script>

@@ -105,31 +105,57 @@ body {
     vertical-align: middle;
 }
 
+.hamburger {
+	display: none;
+    flex-direction: column;
+    cursor: pointer;
+    gap: 5px;
+}
+
+.hamburger .bar {
+    display: block;
+    width: 25px;
+    height: 3px;
+    background-color: #FFFFFF;
+    border-radius: 2px;
+}
+
 @media screen and (max-width: 862px) {
-    .header-container {
-        position: relative;
+	.header-container {
+    	height: auto;         
+        min-height: 75px;      
+        flex-wrap: wrap;
+        padding: 15px 24px;
+    }
+
+    .hamburger {
+        display: flex;
+    }
+
+    .nav-menu, .user-actions {
+        display: none;      
+        width: 100%;        
         flex-direction: column;
-        height: auto;
-        padding: 16px 20px;
+        align-items: center;
+        gap: 15px;
+        padding: 15px 0;
     }
 
-    .nav-menu {
-        width: 100%;
-        text-align: left;
-        margin-top: 20px;
-    }
-	
     .user-actions {
-   		justify-content: right;
-        width: 100%;
-        text-align: left;
-        padding-top: 16px;
         border-top: 1px solid #232a36;
-        margin-top: 12px;
     }
 
-    .action-link {
-        margin-left: 0;
-        margin-right: 28px;
+    .nav-menu li, .user-actions a {
+        width: 100%;
+        text-align: center;
+    }
+
+    .nav-menu.active, 
+    .user-actions.active {
+        display: flex;         
+    }
+
+    .action-link {     
+        justify-content: center;
     }
 }
