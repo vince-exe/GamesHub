@@ -1,21 +1,33 @@
 package model;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 
 public class CarrelloBean implements Serializable {
+    private static final long serialVersionUID = 1L;
+    
+    private ProdottoBean prodotto;
+    private int quantita;
 
-	private ArrayList<ProdottoBean> prodotti;
-	
-	public CarrelloBean() {
-		this.prodotti = new ArrayList<ProdottoBean>();
-	}
-	
-	public ArrayList<ProdottoBean> getProdotti() {
-		return this.prodotti;
-	}
-	
-	public void addProdotto(ProdottoBean prodotto) {
-		this.prodotti.add(prodotto);
-	}
+    public CarrelloBean() {}
+
+    public CarrelloBean(ProdottoBean prodotto, int quantita) {
+        this.prodotto = prodotto;
+        this.quantita = quantita;
+    }
+
+    public ProdottoBean getProdotto() {
+        return prodotto;
+    }
+
+    public void setProdotto(ProdottoBean prodotto) {
+        this.prodotto = prodotto;
+    }
+
+    public int getQuantita() {
+        return quantita;
+    }
+
+    public void setQuantita(int quantita) {
+        this.quantita = quantita;
+    }
 }

@@ -141,7 +141,8 @@
                 <button type="submit" class="btn-form">Salva Modifiche</button>
             </form>
             	<h4 class="oppure">oppure</h4>
-				<a href="${pageContext.request.contextPath}/logout" class="btn-form btn-logout">disconnessione</a>
+				<a href="${pageContext.request.contextPath}/logout" class="btn-form btn-logout"
+				onClick="return confirm('Il tuo carrello verrà svuotato, sei sicuro?')">disconnessione</a>
 				
             <div class="form-footer">
                 <a href="${pageContext.request.contextPath}/catalogo">Torna al catalogo</a>

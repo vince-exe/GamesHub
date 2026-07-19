@@ -135,6 +135,9 @@
 .azione-modifica { background-color: #4caf50; }
 .azione-modifica:hover { background-color: #409142; }
 
+.azione-carrello { background-color: #4caf50; }
+.azione-carrello:hover { background-color: #409142; }
+
 .filtro-container {
     display: flex;
     flex-direction: row;
