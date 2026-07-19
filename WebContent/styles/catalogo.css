@@ -29,6 +29,35 @@
 	text-decoration: underline;
 }
 
+.box-carrello-vuoto {
+    background-color: #1e293b;
+    border-radius: 8px;
+    border-bottom: 3px solid #00d2ff;
+	color: #b5c2d5;
+	display: inline-flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	width: 300px;
+	padding: 20px;
+	letter-spacing: 0.5px;
+	position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    gap: 10px;
+}
+
+.box-carrello-vuoto a {
+	color: #00d2ff;
+	text-decoration: none;
+}
+
+.box-carrello-vuoto a:hover {
+	cursor: pointer;
+	text-decoration: underline;
+}
+
 .container-catalogo {
 	display: flex;
 	flex-direction: column;
@@ -63,11 +92,6 @@
 .btn-aggiungi:hover {
     background-color: #00b4db;
 }
-
-.btn-filtra {
-
-}
-
 
 .tabella-prodotti {
     width: 100%;

@@ -19,7 +19,9 @@
 		<ul class="nav-menu">
 			<li><a href="<%=request.getContextPath()%>/home" class="nav-link">Home</a></li>
 			<li><a href="<%=request.getContextPath()%>/catalogo" class="nav-link">Catalogo</a></li>
-	        <li><a href="#" class="nav-link">F.A.Q</a></li>
+			<%if(utente != null && "cliente".equals(utente.getRuolo())) { %>
+	        	<li><a href="#" class="nav-link">Ordini</a></li>
+	        <%} %>
         </ul>
 		
         <div class="user-actions">
@@ -37,8 +39,9 @@
                 	<%} %>
                 </span>
             </a>
+            
             <%if(utente == null || !utente.getRuolo().equals("amministratore")){ %>
-	            <a href="#" class="action-link cart-btn">
+	            <a href="<%=request.getContextPath()%>/carrello" class="action-link cart-btn">
 	                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
 	                    <circle cx="9" cy="21" r="1"></circle>
 	                    <circle cx="20" cy="21" r="1"></circle>
