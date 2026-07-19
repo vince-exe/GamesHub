@@ -38,7 +38,7 @@
 				<%} else {%>
 					<a href="<%=request.getContextPath()%>/aggiungiModificaProdotto">Continua</a>
 				<%} %>
-			</h4> oppure <h4><a href="<%=request.getContextPath()%>/catalogoAdmin">Vai al catalogo</a></h4>
+			</h4> oppure <h4><a href="<%=request.getContextPath()%>/catalogo">Vai al catalogo</a></h4>
 		</div>
 	</div>
 	<%}

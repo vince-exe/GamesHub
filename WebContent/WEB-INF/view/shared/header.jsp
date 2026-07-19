@@ -18,11 +18,7 @@
         
 		<ul class="nav-menu">
 			<li><a href="<%=request.getContextPath()%>/home" class="nav-link">Home</a></li>
-			<%if(utente != null && "amministratore".equals(utente.getRuolo())) {%>
-	        	<li><a href="<%=request.getContextPath()%>/catalogoAdmin" class="nav-link">Catalogo Amministratore</a></li>
-	        <%} else { %>
-	        	<li><a href="<%=request.getContextPath()%>/catalogo" class="nav-link">Catalogo</a></li>
-	        <%} %>
+			<li><a href="<%=request.getContextPath()%>/catalogo" class="nav-link">Catalogo</a></li>
 	        <li><a href="#" class="nav-link">F.A.Q</a></li>
         </ul>
 		

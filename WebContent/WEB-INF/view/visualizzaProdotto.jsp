@@ -87,7 +87,7 @@
 					</div>
 					
 					<h4>
-						<a class="torna-al-catalogo" href="<%=request.getContextPath()%>/catalogoAdmin">Torna al catalogo</a>
+						<a class="torna-al-catalogo" href="<%=request.getContextPath()%>/catalogo">Torna al catalogo</a>
 					</h4>
 				</div>
 			</div>

@@ -13,8 +13,8 @@ import java.util.List;
 
 import dao.ProdottoDao;
 
-@WebServlet("/catalogoAdmin")
-public class CatalogoAdminServlet extends HttpServlet {
+@WebServlet("/catalogo")
+public class CatalogoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -43,11 +43,11 @@ public class CatalogoAdminServlet extends HttpServlet {
 			
 		} catch (SQLException e) {
 			request.setAttribute("errore", "Errore nel prendere i prodotti del catalogo");
-			request.getRequestDispatcher("/WEB-INF/view/catalogoAdmin.jsp").forward(request, response);
+			request.getRequestDispatcher("/WEB-INF/view/catalogo.jsp").forward(request, response);
 			e.printStackTrace();
 		}
 		
-		request.getRequestDispatcher("/WEB-INF/view/catalogoAdmin.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/view/catalogo.jsp").forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

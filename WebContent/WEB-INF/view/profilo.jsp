@@ -141,7 +141,7 @@
             </form>
 
             <div class="form-footer">
-                <a href="${pageContext.request.contextPath}/<%= ruolo.equalsIgnoreCase("amministratore") ? "catalogoAdmin" : "catalogo" %>">Torna al catalogo</a>
+                <a href="${pageContext.request.contextPath}/catalogo">Torna al catalogo</a>
             </div>
         </div>
     </div>
