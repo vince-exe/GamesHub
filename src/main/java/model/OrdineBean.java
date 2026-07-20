@@ -1,7 +1,10 @@
 package model;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
 
 public class OrdineBean implements Serializable {
 	
@@ -9,10 +12,8 @@ public class OrdineBean implements Serializable {
 	
 	private int idUtente;
 	
-	private int totale;
-	
-	private int eta;
-	
+	private BigDecimal totale;
+		
 	private Timestamp data;
 	
 	private String note;
@@ -25,6 +26,8 @@ public class OrdineBean implements Serializable {
 	
 	private String stato;
 
+	private List<RigaOrdineBean> righeOrdine = new ArrayList<>();
+	
 	public int getId() {
 		return id;
 	}
@@ -41,20 +44,12 @@ public class OrdineBean implements Serializable {
 		this.idUtente = idUtente;
 	}
 
-	public int getTotale() {
+	public BigDecimal getTotale() {
 		return totale;
 	}
 
-	public void setTotale(int totale) {
+	public void setTotale(BigDecimal totale) {
 		this.totale = totale;
-	}
-
-	public int getEta() {
-		return eta;
-	}
-
-	public void setEta(int eta) {
-		this.eta = eta;
 	}
 
 	public Timestamp getData() {
@@ -104,4 +99,12 @@ public class OrdineBean implements Serializable {
 	public void setStato(String stato) {
 		this.stato = stato;
 	}
+	
+	public List<RigaOrdineBean> getRigheOrdine() {
+		return righeOrdine;
+	}
+	
+    public void setRigheOrdine(List<RigaOrdineBean> righeOrdine) {
+    	this.righeOrdine = righeOrdine;
+    }
 }
