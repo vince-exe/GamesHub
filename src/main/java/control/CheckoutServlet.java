@@ -47,7 +47,7 @@ public class CheckoutServlet extends HttpServlet {
 		
 		UtenteBean utenteSessione = (UtenteBean) session.getAttribute("utente");
 		List<CarrelloBean> carrello = (List<CarrelloBean>) session.getAttribute("carrello");
-				
+	
 		try {
             IndirizzoBean indirizzo = new IndirizzoBean();
             indirizzo.setIdUtente(utenteSessione.getId());
@@ -65,9 +65,11 @@ public class CheckoutServlet extends HttpServlet {
             metodo.setCognome(request.getParameter("cognomeTitolare"));
             metodo.setCvc(Integer.parseInt(request.getParameter("cvc")));
 
-    	    String scadenzaStr = request.getParameter("dataScadenza");
-            LocalDate localDate = LocalDate.parse(scadenzaStr, formatter);
+            String scadenzaStr = request.getParameter("dataScadenza");
+            // stesso ragionamento fatto sul frontend 
+            String dataCompletaStr = scadenzaStr + "-01"; 
             
+            LocalDate localDate = LocalDate.parse(dataCompletaStr, formatter);
             LocalDateTime localDateTime = localDate.atStartOfDay();
             metodo.setDataScadenza(Timestamp.valueOf(localDateTime));
             

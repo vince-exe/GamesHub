@@ -39,7 +39,7 @@ public class OrdineDao implements IOrdineDao {
         String insertOrdineQuery = "INSERT INTO Ordine (idUtente, totale, note, "
                 + "spedizione_via, spedizione_cap, spedizione_citta, spedizione_paese, spedizione_civico, "
                 + "pagamento_tipologia, pagamento_numero, pagamento_dataScadenza, pagamento_nome, pagamento_cognome, pagamento_cvc) "
-                + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         String insertRigaQuery = "INSERT INTO RigaOrdine (idOrdine, idProdotto, quantita, prezzoAcquisto) VALUES (?, ?, ?, ?)";
 
