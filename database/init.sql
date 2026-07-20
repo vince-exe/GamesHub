@@ -15,33 +15,6 @@ CREATE TABLE Utente (
     PRIMARY KEY (id)
 );
 
-CREATE TABLE Indirizzo (
-    id INT AUTO_INCREMENT,
-    idUtente INT NOT NULL,
-    via VARCHAR(150) NOT NULL,
-    cap VARCHAR(10) NOT NULL,
-    citta VARCHAR(50) NOT NULL,
-    paese VARCHAR(50) NOT NULL,
-    civico VARCHAR(10) NOT NULL,
-    PRIMARY KEY (id),
-    CONSTRAINT FK_Indirizzo_Utente FOREIGN KEY (idUtente) 
-        REFERENCES Utente(id) ON DELETE CASCADE ON UPDATE CASCADE
-);
-
-CREATE TABLE MetodoPagamento (
-    id INT AUTO_INCREMENT,
-    idUtente INT NOT NULL,
-    tipologia VARCHAR(50) NOT NULL,
-    numero VARCHAR(30) NOT NULL,
-    dataScadenza TIMESTAMP NOT NULL,
-    nome VARCHAR(50) NOT NULL,
-    cognome VARCHAR(50) NOT NULL,
-    cvc INT NOT NULL,
-    PRIMARY KEY (id),
-    CONSTRAINT FK_MetodoPagamento_Utente FOREIGN KEY (idUtente) 
-        REFERENCES Utente(id) ON DELETE CASCADE ON UPDATE CASCADE
-);
-
 CREATE TABLE Prodotto (
     id INT AUTO_INCREMENT,
     nome VARCHAR(100) NOT NULL,
@@ -60,8 +33,7 @@ CREATE TABLE Prodotto (
 CREATE TABLE Ordine (
     id INT AUTO_INCREMENT,
     idUtente INT NOT NULL,
-    totale INT NOT NULL,
-    eta INT NOT NULL,
+    totale DECIMAL(10, 2) NOT NULL,
     data TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     note VARCHAR(200),
     costoSpedizione INT NOT NULL DEFAULT 0,
