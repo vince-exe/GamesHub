@@ -1,5 +1,6 @@
 <%@page import="model.CarrelloBean"%>
 <%@page import="model.ProdottoBean"%>
+<%@page import="model.UtenteBean"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -19,6 +20,7 @@
     <h2 class="titolo-carrello">Il tuo <span>Carrello</span></h2>
 
     <% 
+    	UtenteBean utenteSessione = (UtenteBean) session.getAttribute("utente");
         List<CarrelloBean> carrello = (List<CarrelloBean>) session.getAttribute("carrello");
         double totaleComplessivo = 0.0;
         
@@ -84,10 +86,15 @@
                         <strong id="totale-carrello">€ <%= String.format("%.2f", totaleComplessivo) %></strong>
                     </div>
                     
-                    <a href="<%= request.getContextPath() %>/checkout" class="btn-aggiungi btn-checkout">
-                        Procedi al Checkout
-                    </a>
-                    
+                    <%if(utenteSessione == null) { %>
+	                    <a href="<%= request.getContextPath() %>/registrazione" class="btn-aggiungi btn-checkout">
+	                        Registrati
+	                    </a>
+                    <%} else { %>
+                    	<a href="<%= request.getContextPath() %>/checkout" class="btn-aggiungi btn-checkout">
+	                    	Procedi al Checkout
+	                    </a>
+	                <%} %>
                     <a href="<%= request.getContextPath() %>/catalogo" class="continua-shopping">Continua lo Shopping</a>
                 </div>
             </div>
