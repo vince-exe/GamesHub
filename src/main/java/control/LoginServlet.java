@@ -42,8 +42,10 @@ public class LoginServlet extends HttpServlet {
 			}
 			else {
 				request.setAttribute("errore", "Credenziali errate");
+				request.getRequestDispatcher("/WEB-INF/view/login.jsp").forward(request, response);
 			}
-		} catch (SQLException e) {
+		} 
+		catch (SQLException e) {
 			request.setAttribute("errore", "Errore imprevisto sul server");
 			e.printStackTrace();
 		}
