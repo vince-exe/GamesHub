@@ -36,7 +36,7 @@ public class OrdineDao implements IOrdineDao {
         PreparedStatement psOrdine = null;
         PreparedStatement psRiga = null;
 
-        String insertOrdineQuery = "INSERT INTO Ordine (idUtente, totale, note, costoSpedizione, stato, "
+        String insertOrdineQuery = "INSERT INTO Ordine (idUtente, totale, note, "
                 + "spedizione_via, spedizione_cap, spedizione_citta, spedizione_paese, spedizione_civico, "
                 + "pagamento_tipologia, pagamento_numero, pagamento_dataScadenza, pagamento_nome, pagamento_cognome, pagamento_cvc) "
                 + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
@@ -51,37 +51,33 @@ public class OrdineDao implements IOrdineDao {
             psOrdine.setInt(1, ordine.getIdUtente());
             psOrdine.setBigDecimal(2, ordine.getTotale());
             psOrdine.setString(3, ordine.getNote());
-            psOrdine.setInt(4, ordine.getCostoSpedizione());
-            psOrdine.setString(5, ordine.getStato());
 
             IndirizzoBean indirizzo = ordine.getIndirizzoBean();
-            psOrdine.setString(6, indirizzo.getVia());
-            psOrdine.setString(7, indirizzo.getCap());
-            psOrdine.setString(8, indirizzo.getCittà());
-            psOrdine.setString(9, indirizzo.getPaese());
-            psOrdine.setString(10, indirizzo.getCivico());
+            psOrdine.setString(4, indirizzo.getVia());
+            psOrdine.setString(5, indirizzo.getCap());
+            psOrdine.setString(6, indirizzo.getCittà());
+            psOrdine.setString(7, indirizzo.getPaese());
+            psOrdine.setString(8, indirizzo.getCivico());
 
             MetodoPagamentoBean metodo = ordine.getMetodoPagamentoBean();
-            psOrdine.setString(11, metodo.getTipologia());
-            psOrdine.setString(12, metodo.getNumero());
-            psOrdine.setTimestamp(13, metodo.getDataScadenza());
-            psOrdine.setString(14, metodo.getNome());
-            psOrdine.setString(15, metodo.getCognome());
-            psOrdine.setInt(16, metodo.getCvc());
+            psOrdine.setString(9, metodo.getTipologia());
+            psOrdine.setString(10, metodo.getNumero());
+            psOrdine.setTimestamp(11, metodo.getDataScadenza());
+            psOrdine.setString(12, metodo.getNome());
+            psOrdine.setString(13, metodo.getCognome());
+            psOrdine.setInt(14, metodo.getCvc());
 
             psOrdine.executeUpdate();
 
             ResultSet rs = psOrdine.getGeneratedKeys();
             int idOrdine = 0;
-            if (rs.next()) {
+            if(rs.next()) {
                 idOrdine = rs.getInt(1);
                 ordine.setId(idOrdine);
             }
-
-
-                psRiga = connection.prepareStatement(insertRigaQuery);
+            psRiga = connection.prepareStatement(insertRigaQuery);
                 
-            for (RigaOrdineBean riga : ordine.getRigheOrdine()) {
+            for(RigaOrdineBean riga : ordine.getRigheOrdine()) {
             	riga.setIdOrdine(idOrdine);
                     
                 psRiga.setInt(1, riga.getIdOrdine());
@@ -97,7 +93,7 @@ public class OrdineDao implements IOrdineDao {
             connection.commit();
 
         } 
-        catch (SQLException e) {
+        catch(SQLException e) {
         	connection.rollback();
         	e.printStackTrace();
             throw e;

@@ -21,10 +21,6 @@ public class OrdineBean implements Serializable {
 	private IndirizzoBean indirizzoBean;
 	
 	private MetodoPagamentoBean metodoPagamentoBean;
-		
-	private int costoSpedizione;
-	
-	private String stato;
 
 	private List<RigaOrdineBean> righeOrdine = new ArrayList<>();
 	
@@ -82,22 +78,6 @@ public class OrdineBean implements Serializable {
 
 	public void setMetodoPagamentoBean(MetodoPagamentoBean metodoPagamentoBean) {
 		this.metodoPagamentoBean = metodoPagamentoBean;
-	}
-
-	public int getCostoSpedizione() {
-		return costoSpedizione;
-	}
-
-	public void setCostoSpedizione(int costoSpedizione) {
-		this.costoSpedizione = costoSpedizione;
-	}
-
-	public String getStato() {
-		return stato;
-	}
-
-	public void setStato(String stato) {
-		this.stato = stato;
 	}
 	
 	public List<RigaOrdineBean> getRigheOrdine() {

@@ -36,8 +36,6 @@ CREATE TABLE Ordine (
     totale DECIMAL(10, 2) NOT NULL,
     data TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     note VARCHAR(200),
-    costoSpedizione INT NOT NULL DEFAULT 0,
-    stato VARCHAR(30) NOT NULL DEFAULT 'In elaborazione',
     
     -- indirizzo bean
     spedizione_via VARCHAR(150) NOT NULL,

@@ -74,8 +74,6 @@ public class CheckoutServlet extends HttpServlet {
             OrdineBean ordine = new OrdineBean();
             ordine.setIdUtente(utenteSessione.getId());
             ordine.setNote(request.getParameter("note"));
-            ordine.setCostoSpedizione(0);
-            ordine.setStato("In elaborazione");
             ordine.setIndirizzoBean(indirizzo);
             ordine.setMetodoPagamentoBean(metodo);
 
