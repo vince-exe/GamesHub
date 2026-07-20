@@ -15,7 +15,7 @@
 <body>
 <%@ include file="shared/header.jsp"%>
 
-<div class="carrello-container">
+<div class="container-carrello">
     <h2 class="titolo-carrello">Il tuo <span>Carrello</span></h2>
 
     <% 
@@ -24,18 +24,18 @@
         
         if(carrello == null || carrello.isEmpty()) {%>
 	        <div class="box-carrello-vuoto">
-	            <h3>Il tuo carrello è vuoto</h3>
-	            <p>Non hai ancora aggiunto nessun gioco al tuo catalogo.</p>
-	            <a href="<%=request.getContextPath()%>/catalogo" class="btn btn-primary">Vai al catalogo</a>
+	            <h4>Il tuo carrello è vuoto</h4>
+	            <h5>Non hai ancora aggiunto nessun gioco al tuo catalogo.</h5>
+	            <a href="<%=request.getContextPath()%>/catalogo">Vai al catalogo</a>
 	        </div>
     	<% } else { %>
         <div class="carrello-layout">
-            
-            <div class="colonna-tabella">
-                <table class="tabella-carrello">
+            <div class="sezione-tabella">
+                <table class="tabella-prodotti">
                     <thead>
                         <tr>
-                            <th>Prodotto</th>
+                            <th>Nome</th>
+                            <th>Piattaforma/Tipo</th>
                             <th>Prezzo</th>
                             <th>Quantità</th>
                             <th>Subtotale</th>
@@ -49,28 +49,23 @@
                             int idProd = item.getProdotto().getId();
                         %>
                             <tr id="riga-prodotto-<%= idProd %>">
-                                <td class="cella-nome">
-                                    <span class="piattaforma-tag"><%= item.getProdotto().getPiattaforma() != null ? item.getProdotto().getPiattaforma() : item.getProdotto().getTipologia() %></span>
-                                    <strong><%= item.getProdotto().getNome() %></strong>
-                                </td>
-                                <td>€ <%= String.format("%.2f", item.getProdotto().getPrezzo()) %></td>
+                                <td class="cella-nome"><strong><%= item.getProdotto().getNome() %></strong></td>
+                                <td><%= item.getProdotto().getPiattaforma() != null ? item.getProdotto().getPiattaforma() : item.getProdotto().getTipologia() %></td>
+                                <td>€ <%= String.format("%.2f", item.getProdotto().getPrezzo().doubleValue()) %></td>
                                 <td>
                                     <div class="selettore-quantita">
                                         <button type="button" class="btn-qty" onclick="cambiaQuantita(<%= idProd %>, -1, '<%= request.getContextPath() %>')">-</button>
-                                        
-                                        <span id="quantita-<%= idProd %>" class="valore-quantita"><%= item.getQuantita() %></span>
-                                        
+                                        <span id="quantita-<%= idProd %>" class="valore-quantita"><%=item.getQuantita()%></span>
                                         <button type="button" class="btn-qty" onclick="cambiaQuantita(<%= idProd %>, 1, '<%= request.getContextPath() %>')">+</button>
                                     </div>
                                 </td>
                                 <td id="subtotale-<%= idProd %>" class="cella-subtotale">
                                     € <%= String.format("%.2f", subtotaleItem) %>
                                 </td>
-                                <td>
-                                    <button class="btn-elimina" onclick="rimuoviDalCarrello(<%= idProd %>, '<%= request.getContextPath() %>')" title="Rimuovi prodotto">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                            <polyline points="3 6 5 6 21 6"></polyline>
-                                            <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                                <td class="container-azioni">
+                                    <button class="azione azione-rimuovi" onclick="rimuoviDalCarrello(<%= idProd %>, '<%= request.getContextPath() %>')" title="Rimuovi prodotto">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewBox="0 0 24 24" fill="none">
+                                            <path d="M10 12L14 16M14 12L10 16M4 6H20M16 6L15.7294 5.18807C15.4671 4.40125 15.3359 4.00784 15.0927 3.71698C14.8779 3.46013 14.6021 3.26132 14.2905 3.13878C13.9376 3 13.523 3 12.6936 3H11.3064C10.477 3 10.0624 3 9.70951 3.13878C9.39792 3.26132 9.12208 3.46013 8.90729 3.71698C8.66405 4.00784 8.53292 4.40125 8.27064 5.18807L8 6M18 6V16.2C18 17.8802 18 18.7202 17.673 19.362C17.3854 19.9265 16.9265 20.3854 16.362 20.673C15.7202 21 14.8802 21 13.2 21H10.8C9.11984 21 8.27976 21 7.63803 20.673C7.07354 20.3854 6.6146 19.9265 6.32698 19.362C6 18.7202 6 17.8802 6 16.2V6" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                                         </svg>
                                     </button>
                                 </td>
@@ -84,22 +79,16 @@
                 <div class="checkout-card">
                     <h3>Riepilogo</h3>
                     <hr class="divisore-checkout">
-                    <div class="dettaglio-prezzo">
-                        <span>Spedizione</span>
-                        <span class="gratis">Gratis (Digital Key)</span>
-                    </div>
                     <div class="dettaglio-prezzo totale-riga">
                         <span>Totale</span>
                         <strong id="totale-carrello">€ <%= String.format("%.2f", totaleComplessivo) %></strong>
                     </div>
                     
-                    <a href="<%= request.getContextPath() %>/checkout" class="btn-form btn-checkout">
+                    <a href="<%= request.getContextPath() %>/checkout" class="btn-aggiungi btn-checkout">
                         Procedi al Checkout
                     </a>
                     
-                    <a href="<%= request.getContextPath() %>/catalogo" class="continua-shopping">
-                        &larr; Continua lo Shopping
-                    </a>
+                    <a href="<%= request.getContextPath() %>/catalogo" class="continua-shopping">Continua lo Shopping</a>
                 </div>
             </div>
 

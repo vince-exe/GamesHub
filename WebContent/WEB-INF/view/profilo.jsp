@@ -142,7 +142,7 @@
             </form>
             	<h4 class="oppure">oppure</h4>
 				<a href="${pageContext.request.contextPath}/logout" class="btn-form btn-logout"
-				onClick="return confirm('Il tuo carrello verrà svuotato, sei sicuro?')">disconnessione</a>
+				onClick="return confirm('Sei sicuro di voler effettuare la disconnessione dal sito?')">disconnessione</a>
 				
             <div class="form-footer">
                 <a href="${pageContext.request.contextPath}/catalogo">Torna al catalogo</a>

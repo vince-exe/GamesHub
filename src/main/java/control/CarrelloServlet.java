@@ -74,31 +74,49 @@ public class CarrelloServlet extends HttpServlet {
 	
 		case "update":
 			String quantitaString = request.getParameter("quantita");
-				try {
-					int nuovaQuantita = Integer.parseInt(quantitaString);
-					
-					if(nuovaQuantita <= 0) {
-						carrello.removeIf(item -> item.getProdotto().getId() == idProdotto);
-						response.setStatus(HttpServletResponse.SC_OK);
-						return;
-					}
-					
-					boolean trovato = false;
-					for(CarrelloBean item : carrello) {
-						if(item.getProdotto().getId() == idProdotto) {
+			try {
+				int nuovaQuantita = Integer.parseInt(quantitaString);
+				
+				if (nuovaQuantita <= 0) {
+					carrello.removeIf(item -> item.getProdotto().getId() == idProdotto);
+				} 
+				else {
+					for (CarrelloBean item : carrello) {
+						if (item.getProdotto().getId() == idProdotto) {
 							item.setQuantita(nuovaQuantita);
-							trovato = true;
 							break;
 						}
 					}
-					
-					if(trovato) {
-						response.setStatus(HttpServletResponse.SC_OK);
-					} 
-				} 
-				catch (NumberFormatException e) {
-					response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Quantità non valida.");
 				}
+				
+				StringBuilder jsonStr = new StringBuilder("[");
+				for (int i = 0; i < carrello.size(); i++) {
+					CarrelloBean item = carrello.get(i);
+					ProdottoBean p = item.getProdotto();
+					double subtotale = p.getPrezzo().doubleValue() * item.getQuantita();
+					
+					jsonStr.append("{\"id\":").append(p.getId())
+						   .append(", \"nome\":\"").append(p.getNome().replace("\"", "\\\""))
+						   .append("\", \"prezzo\":").append(String.format(java.util.Locale.US, "%.2f", p.getPrezzo().doubleValue()))
+						   .append(", \"quantita\":").append(item.getQuantita())
+						   .append(", \"subtotale\":").append(String.format(java.util.Locale.US, "%.2f", subtotale))
+						   .append("}");
+					
+					if (i < carrello.size() - 1) {
+						jsonStr.append(","); 
+					}
+				}
+				jsonStr.append("]");
+
+				response.setContentType("application/json");
+				response.setCharacterEncoding("UTF-8");
+				response.getWriter().write(jsonStr.toString());
+				response.setStatus(HttpServletResponse.SC_OK);
+			} 
+			catch (Exception e) {
+				e.printStackTrace();
+				response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+			}
 			break;
 		
 		case "delete":
@@ -112,6 +130,29 @@ public class CarrelloServlet extends HttpServlet {
 			
 			if(itemDaRimuovere != null) {
 				carrello.remove(itemDaRimuovere);
+				
+				StringBuilder jsonStr = new StringBuilder("[");
+				for (int i = 0; i < carrello.size(); i++) {
+					CarrelloBean item = carrello.get(i);
+					ProdottoBean p = item.getProdotto();
+					double subtotale = p.getPrezzo().doubleValue() * item.getQuantita();
+					
+					jsonStr.append("{\"id\":").append(p.getId())
+						   .append(", \"nome\":\"").append(p.getNome().replace("\"", "\\\""))
+						   .append("\", \"prezzo\":").append(String.format(java.util.Locale.US, "%.2f", p.getPrezzo().doubleValue()))
+						   .append(", \"quantita\":").append(item.getQuantita())
+						   .append(", \"subtotale\":").append(String.format(java.util.Locale.US, "%.2f", subtotale))
+						   .append("}");
+					
+					if (i < carrello.size() - 1) {
+						jsonStr.append(","); 
+					}
+				}
+				jsonStr.append("]");
+
+				response.setContentType("application/json");
+				response.setCharacterEncoding("UTF-8");
+				response.getWriter().write(jsonStr.toString());
 				response.setStatus(HttpServletResponse.SC_OK);
 			} 
 			else {
