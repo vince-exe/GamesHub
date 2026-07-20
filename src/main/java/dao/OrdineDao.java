@@ -5,6 +5,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -110,5 +112,170 @@ public class OrdineDao implements IOrdineDao {
                 connection.close();
             }
         }
+    }
+	
+    public List<OrdineBean> doRetrieveAll() throws SQLException {
+        List<OrdineBean> ordini = new ArrayList<>();
+        
+        String query = "SELECT * FROM Ordine ORDER BY id DESC";
+        
+        try (Connection con = ds.getConnection(); 
+                PreparedStatement ps = con.prepareStatement(query);
+                ResultSet rs = ps.executeQuery()) {
+            
+            while (rs.next()) {
+                OrdineBean ordine = new OrdineBean();
+                ordine.setId(rs.getInt("id")); 
+                ordine.setIdUtente(rs.getInt("idUtente"));
+                ordine.setTotale(rs.getBigDecimal("totale"));
+                ordine.setNote(rs.getString("note"));
+
+                IndirizzoBean indirizzo = new IndirizzoBean();
+                indirizzo.setVia(rs.getString("spedizione_via"));
+                indirizzo.setCap(rs.getString("spedizione_cap"));
+                indirizzo.setCittà(rs.getString("spedizione_citta"));
+                indirizzo.setPaese(rs.getString("spedizione_paese"));
+                indirizzo.setCivico(rs.getString("spedizione_civico"));
+                ordine.setIndirizzoBean(indirizzo);
+
+                MetodoPagamentoBean metodo = new MetodoPagamentoBean();
+                metodo.setTipologia(rs.getString("pagamento_tipologia"));
+                metodo.setNumero(rs.getString("pagamento_numero"));
+                metodo.setDataScadenza(rs.getTimestamp("pagamento_dataScadenza"));
+                metodo.setNome(rs.getString("pagamento_nome"));
+                metodo.setCognome(rs.getString("pagamento_cognome"));
+                metodo.setCvc(rs.getInt("pagamento_cvc"));
+                ordine.setMetodoPagamentoBean(metodo);
+
+                ordini.add(ordine);
+            }
+        } 
+
+        return ordini;
+    }
+    
+    public List<OrdineBean> doRetrieveByFiltri(String dataDa, String dataA, Integer idUtente) throws SQLException {
+        List<OrdineBean> ordini = new ArrayList<>();
+
+        StringBuilder query = new StringBuilder("SELECT * FROM Ordine");
+        
+        if (dataDa != null && !dataDa.isEmpty()) {
+            query.append("WHERE pagamento_dataScadenza >= ?"); 
+        }
+        if (dataA != null && !dataA.isEmpty()) {
+            query.append(" AND pagamento_dataScadenza <= ?"); 
+        }
+        if (idUtente != null && idUtente > 0) {
+            query.append(" AND idUtente = ?");
+        }
+        
+        query.append(" ORDER BY id DESC");
+
+        try (Connection con = ds.getConnection(); 
+                PreparedStatement ps = con.prepareStatement(query.toString());
+                ResultSet rs = ps.executeQuery()) {
+        	
+            int paramIndex = 1;
+            if (dataDa != null && !dataDa.isEmpty()) {
+                ps.setString(paramIndex++, dataDa + " 00:00:00");
+            }
+            if (dataA != null && !dataA.isEmpty()) {
+                ps.setString(paramIndex++, dataA + " 23:59:59");
+            }
+            if (idUtente != null && idUtente > 0) {
+                ps.setInt(paramIndex++, idUtente);
+            }
+
+            while (rs.next()) {
+                OrdineBean ordine = new OrdineBean();
+                ordine.setId(rs.getInt("id")); 
+                ordine.setIdUtente(rs.getInt("idUtente"));
+                ordine.setTotale(rs.getBigDecimal("totale"));
+                ordine.setNote(rs.getString("note"));
+
+                IndirizzoBean indirizzo = new IndirizzoBean();
+                indirizzo.setVia(rs.getString("spedizione_via"));
+                indirizzo.setCap(rs.getString("spedizione_cap"));
+                indirizzo.setCittà(rs.getString("spedizione_citta"));
+                indirizzo.setPaese(rs.getString("spedizione_paese"));
+                indirizzo.setCivico(rs.getString("spedizione_civico"));
+                ordine.setIndirizzoBean(indirizzo);
+
+                MetodoPagamentoBean metodo = new MetodoPagamentoBean();
+                metodo.setTipologia(rs.getString("pagamento_tipologia"));
+                metodo.setNumero(rs.getString("pagamento_numero"));
+                metodo.setDataScadenza(rs.getTimestamp("pagamento_dataScadenza"));
+                metodo.setNome(rs.getString("pagamento_nome"));
+                metodo.setCognome(rs.getString("pagamento_cognome"));
+                metodo.setCvc(rs.getInt("pagamento_cvc"));
+                ordine.setMetodoPagamentoBean(metodo);
+
+                ordini.add(ordine);
+            }
+        } 
+        
+        return ordini;
+    }
+
+    public OrdineBean doRetrieveByKey(int idOrdine) throws SQLException {
+        Connection connection = null;
+        PreparedStatement psOrdine = null;
+        PreparedStatement psRighe = null;
+        OrdineBean ordine = null;
+        
+        try {
+            connection = ds.getConnection();
+            
+            psOrdine = connection.prepareStatement("SELECT * FROM Ordine WHERE id = ?");
+            psOrdine.setInt(1, idOrdine);
+            ResultSet rsOrdine = psOrdine.executeQuery();
+            
+            if (rsOrdine.next()) {
+                ordine = new OrdineBean();
+                ordine.setId(rsOrdine.getInt("id")); 
+                ordine.setIdUtente(rsOrdine.getInt("idUtente"));
+                ordine.setTotale(rsOrdine.getBigDecimal("totale"));
+                ordine.setNote(rsOrdine.getString("note"));
+
+                IndirizzoBean indirizzo = new IndirizzoBean();
+                indirizzo.setVia(rsOrdine.getString("spedizione_via"));
+                indirizzo.setCap(rsOrdine.getString("spedizione_cap"));
+                indirizzo.setCittà(rsOrdine.getString("spedizione_citta"));
+                indirizzo.setPaese(rsOrdine.getString("spedizione_paese"));
+                indirizzo.setCivico(rsOrdine.getString("spedizione_civico"));
+                ordine.setIndirizzoBean(indirizzo);
+
+                MetodoPagamentoBean metodo = new MetodoPagamentoBean();
+                metodo.setTipologia(rsOrdine.getString("pagamento_tipologia"));
+                metodo.setNumero(rsOrdine.getString("pagamento_numero"));
+                metodo.setDataScadenza(rsOrdine.getTimestamp("pagamento_dataScadenza"));
+                metodo.setNome(rsOrdine.getString("pagamento_nome"));
+                metodo.setCognome(rsOrdine.getString("pagamento_cognome"));
+                metodo.setCvc(rsOrdine.getInt("pagamento_cvc"));
+                ordine.setMetodoPagamentoBean(metodo);
+                
+                psRighe = connection.prepareStatement("SELECT * FROM RigaOrdine WHERE idOrdine = ?");
+                psRighe.setInt(1, idOrdine);
+                ResultSet rsRighe = psRighe.executeQuery();
+                
+                List<RigaOrdineBean> righe = new ArrayList<>();
+                while (rsRighe.next()) {
+                    RigaOrdineBean riga = new RigaOrdineBean();
+                    riga.setIdOrdine(rsRighe.getInt("idOrdine"));
+                    riga.setIdProdotto(rsRighe.getInt("idProdotto"));
+                    riga.setQuantita(rsRighe.getInt("quantita"));
+                    riga.setPrezzoAcquisto(rsRighe.getBigDecimal("prezzoAcquisto"));
+                    righe.add(riga);
+                }
+                ordine.setRigheOrdine(righe);
+            }
+        } 
+        finally {
+            if (psOrdine != null) psOrdine.close();
+            if (psRighe != null) psRighe.close();
+            if (connection != null) connection.close();
+        }
+        
+        return ordine;
     }
 }
