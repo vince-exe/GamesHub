@@ -129,24 +129,8 @@ public class OrdineDao implements IOrdineDao {
                 ordine.setIdUtente(rs.getInt("idUtente"));
                 ordine.setTotale(rs.getBigDecimal("totale"));
                 ordine.setNote(rs.getString("note"));
-
-                IndirizzoBean indirizzo = new IndirizzoBean();
-                indirizzo.setVia(rs.getString("spedizione_via"));
-                indirizzo.setCap(rs.getString("spedizione_cap"));
-                indirizzo.setCittà(rs.getString("spedizione_citta"));
-                indirizzo.setPaese(rs.getString("spedizione_paese"));
-                indirizzo.setCivico(rs.getString("spedizione_civico"));
-                ordine.setIndirizzoBean(indirizzo);
-
-                MetodoPagamentoBean metodo = new MetodoPagamentoBean();
-                metodo.setTipologia(rs.getString("pagamento_tipologia"));
-                metodo.setNumero(rs.getString("pagamento_numero"));
-                metodo.setDataScadenza(rs.getTimestamp("pagamento_dataScadenza"));
-                metodo.setNome(rs.getString("pagamento_nome"));
-                metodo.setCognome(rs.getString("pagamento_cognome"));
-                metodo.setCvc(rs.getInt("pagamento_cvc"));
-                ordine.setMetodoPagamentoBean(metodo);
-
+                ordine.setData(rs.getTimestamp("data"));
+                
                 ordini.add(ordine);
             }
         } 
@@ -154,63 +138,48 @@ public class OrdineDao implements IOrdineDao {
         return ordini;
     }
     
-    public List<OrdineBean> doRetrieveByFiltri(String dataDa, String dataA, Integer idUtente) throws SQLException {
+    public List<OrdineBean> doRetrieveByFiltri(String dataDa, String dataA, int idUtente) throws SQLException {
         List<OrdineBean> ordini = new ArrayList<>();
 
-        StringBuilder query = new StringBuilder("SELECT * FROM Ordine");
+        // 1=1 mi serve per concatenare gli altri filtri con gli AND così mi è comodo
+        StringBuilder query = new StringBuilder("SELECT * FROM Ordine WHERE 1=1 ");
         
-        if (dataDa != null && !dataDa.isEmpty()) {
-            query.append("WHERE pagamento_dataScadenza >= ?"); 
+        if(dataDa != null) {
+            query.append("AND pagamento_dataScadenza >= ?"); 
         }
-        if (dataA != null && !dataA.isEmpty()) {
+        if(dataA != null) {
             query.append(" AND pagamento_dataScadenza <= ?"); 
         }
-        if (idUtente != null && idUtente > 0) {
+        if(idUtente > 0) {
             query.append(" AND idUtente = ?");
         }
         
         query.append(" ORDER BY id DESC");
 
         try (Connection con = ds.getConnection(); 
-                PreparedStatement ps = con.prepareStatement(query.toString());
-                ResultSet rs = ps.executeQuery()) {
+                PreparedStatement ps = con.prepareStatement(query.toString())) {
         	
             int paramIndex = 1;
-            if (dataDa != null && !dataDa.isEmpty()) {
+            if (dataDa != null) {
                 ps.setString(paramIndex++, dataDa + " 00:00:00");
             }
-            if (dataA != null && !dataA.isEmpty()) {
+            if (dataA != null) {
                 ps.setString(paramIndex++, dataA + " 23:59:59");
             }
-            if (idUtente != null && idUtente > 0) {
+            if (idUtente > 0) {
                 ps.setInt(paramIndex++, idUtente);
             }
+            try (ResultSet rs = ps.executeQuery()) {
+            	while (rs.next()) {
+                    OrdineBean ordine = new OrdineBean();
+                    ordine.setId(rs.getInt("id")); 
+                    ordine.setIdUtente(rs.getInt("idUtente"));
+                    ordine.setTotale(rs.getBigDecimal("totale"));
+                    ordine.setNote(rs.getString("note"));
+                    ordine.setData(rs.getTimestamp("data"));
 
-            while (rs.next()) {
-                OrdineBean ordine = new OrdineBean();
-                ordine.setId(rs.getInt("id")); 
-                ordine.setIdUtente(rs.getInt("idUtente"));
-                ordine.setTotale(rs.getBigDecimal("totale"));
-                ordine.setNote(rs.getString("note"));
-
-                IndirizzoBean indirizzo = new IndirizzoBean();
-                indirizzo.setVia(rs.getString("spedizione_via"));
-                indirizzo.setCap(rs.getString("spedizione_cap"));
-                indirizzo.setCittà(rs.getString("spedizione_citta"));
-                indirizzo.setPaese(rs.getString("spedizione_paese"));
-                indirizzo.setCivico(rs.getString("spedizione_civico"));
-                ordine.setIndirizzoBean(indirizzo);
-
-                MetodoPagamentoBean metodo = new MetodoPagamentoBean();
-                metodo.setTipologia(rs.getString("pagamento_tipologia"));
-                metodo.setNumero(rs.getString("pagamento_numero"));
-                metodo.setDataScadenza(rs.getTimestamp("pagamento_dataScadenza"));
-                metodo.setNome(rs.getString("pagamento_nome"));
-                metodo.setCognome(rs.getString("pagamento_cognome"));
-                metodo.setCvc(rs.getInt("pagamento_cvc"));
-                ordine.setMetodoPagamentoBean(metodo);
-
-                ordini.add(ordine);
+                    ordini.add(ordine);
+                }
             }
         } 
         
@@ -236,7 +205,8 @@ public class OrdineDao implements IOrdineDao {
                 ordine.setIdUtente(rsOrdine.getInt("idUtente"));
                 ordine.setTotale(rsOrdine.getBigDecimal("totale"));
                 ordine.setNote(rsOrdine.getString("note"));
-
+                ordine.setData(rsOrdine.getTimestamp("data"));
+                
                 IndirizzoBean indirizzo = new IndirizzoBean();
                 indirizzo.setVia(rsOrdine.getString("spedizione_via"));
                 indirizzo.setCap(rsOrdine.getString("spedizione_cap"));

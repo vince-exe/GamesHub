@@ -10,5 +10,5 @@ public interface IOrdineDao {
 	
 	public List<OrdineBean> doRetrieveAll() throws SQLException;
 	
-	public List<OrdineBean> doRetrieveByFiltri(String dataDa, String dataA, Integer idUtente) throws SQLException;
+	public List<OrdineBean> doRetrieveByFiltri(String dataDa, String dataA, int idUtente) throws SQLException;
 }
