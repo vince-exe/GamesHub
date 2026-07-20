@@ -100,15 +100,17 @@ public class CheckoutServlet extends HttpServlet {
 
             session.removeAttribute("carrello");
             request.setAttribute("messaggio", "Ordine effettuato con successo!");
-            request.getRequestDispatcher("/WEB-INF/view/checkout.jsp").forward(request, response);
         } 
 		catch (SQLException e) {
             e.printStackTrace();
-            response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Errore nella transazione sul database.");
+            request.setAttribute("errore", "Errore nella transazione sul database");
         } 
 		catch (Exception e) {
             e.printStackTrace();
-            response.sendError(HttpServletResponse.SC_BAD_REQUEST, "I dati del modulo non sono validi.");
+            request.setAttribute("errore", "Errore sconosciuto sul server");
         }
+		finally {
+            request.getRequestDispatcher("/WEB-INF/view/checkout.jsp").forward(request, response);
+		}
     }
 }

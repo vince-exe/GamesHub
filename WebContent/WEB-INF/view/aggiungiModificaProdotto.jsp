@@ -177,9 +177,9 @@
 				
 				<div class="form-footer">
 					<%if(prodotto != null) { %>
-						<h4>Non vuoi più modificare? <a href="<%=request.getContextPath()%>/catalogoAdmin">Visualizza il catalogo</a></h4>
+						<h4>Non vuoi più modificare? <a href="<%=request.getContextPath()%>/catalogo">Visualizza il catalogo</a></h4>
 					<%} else { %>
-						<h4>Finito di aggiungere? <a href="<%=request.getContextPath()%>/catalogoAdmin">Visualizza il catalogo</a></h4>
+						<h4>Finito di aggiungere? <a href="<%=request.getContextPath()%>/catalogo">Visualizza il catalogo</a></h4>
 					<%} %>
 				</div>
 			</form>
