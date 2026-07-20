@@ -5,5 +5,5 @@ import java.sql.SQLException;
 import model.OrdineBean;
 
 public interface IOrdineDao {
-	public void doSave(OrdineBean ordine, int idUtente) throws SQLException;
+	public void doSave(OrdineBean ordine) throws SQLException;
 }
