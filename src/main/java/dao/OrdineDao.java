@@ -144,13 +144,17 @@ public class OrdineDao implements IOrdineDao {
         // 1=1 mi serve per concatenare gli altri filtri con gli AND così mi è comodo
         StringBuilder query = new StringBuilder("SELECT * FROM Ordine WHERE 1=1 ");
         
-        if(dataDa != null) {
-            query.append("AND pagamento_dataScadenza >= ?"); 
+        boolean hasDataDa = dataDa != null && !dataDa.isEmpty();
+        boolean hasDataA = dataA != null && !dataA.isEmpty();
+        boolean hasIdUtente = idUtente > 0;
+        
+        if(hasDataDa) {
+            query.append("AND data >= ?"); 
         }
-        if(dataA != null) {
-            query.append(" AND pagamento_dataScadenza <= ?"); 
+        if(hasDataA) {
+            query.append(" AND data <= ?"); 
         }
-        if(idUtente > 0) {
+        if(hasIdUtente) {
             query.append(" AND idUtente = ?");
         }
         
@@ -160,13 +164,13 @@ public class OrdineDao implements IOrdineDao {
                 PreparedStatement ps = con.prepareStatement(query.toString())) {
         	
             int paramIndex = 1;
-            if (dataDa != null) {
+            if (hasDataDa) {
                 ps.setString(paramIndex++, dataDa + " 00:00:00");
             }
-            if (dataA != null) {
+            if (hasDataA) {
                 ps.setString(paramIndex++, dataA + " 23:59:59");
             }
-            if (idUtente > 0) {
+            if (hasIdUtente) {
                 ps.setInt(paramIndex++, idUtente);
             }
             try (ResultSet rs = ps.executeQuery()) {

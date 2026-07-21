@@ -18,13 +18,8 @@
     boolean amministratore = utenteSessione != null && "amministratore".equals(utenteSessione.getRuolo());
 	
     java.util.List<OrdineBean> ordini = (java.util.List<OrdineBean>) request.getAttribute("ordini");
+%>
 
-    if(ordini == null || ordini.size() == 0) { %>
-	<div class="box-catalogo-vuoto">
-        <h4>Non è stato trovato alcun ordine</h4>
-        <h5>Prova a modificare i filtri di ricerca</h5>
-    </div>
-<% } else { %>
 <div class="container-catalogo">
     	<% if(amministratore) { %>
         	<h3>Gestione Ordini Piattaforma</h3>
@@ -34,7 +29,7 @@
         
         <div class="azioni-top">
             <div class="filtro-container">
-				<form action="<%= request.getContextPath() %>/ordini" method="GET" class="filtro-form">
+				<form action="<%=request.getContextPath()%>/ordini" method="GET" class="filtro-form">
 				        
                         <label for="dataDa">Dalla data:</label>
 				        <input type="date" id="dataDa" name="dataDa">
@@ -52,6 +47,11 @@
 		    </div>
         </div>
 
+		<%if(ordini == null || ordini.size() == 0) {%>
+			<div class="box-catalogo-vuoto">
+		        <h4>Non è stato trovato alcun ordine</h4>
+		    </div>
+    	<%} else {%>
         <table class="tabella-prodotti">
             <thead>
                 <tr>
@@ -99,7 +99,7 @@
                 <% } %>
             </tbody>
         </table>
+        <%}%>
     </div>
-<% } %>
 </body>
 </html>

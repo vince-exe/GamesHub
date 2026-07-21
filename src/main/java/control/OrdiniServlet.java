@@ -23,12 +23,20 @@ public class OrdiniServlet extends HttpServlet {
 		
 		UtenteBean utenteSessione = (UtenteBean) session.getAttribute("utente");
 		
+		String dataDa = request.getParameter("dataDa");
+        String dataA = request.getParameter("dataA");
+        String idUtenteParam = request.getParameter("idUtenteFiltro");
+        int idUtente = 0;
+        
+        if(idUtenteParam != null && !idUtenteParam.isEmpty())
+        	idUtente = Integer.parseInt(idUtenteParam);
+        
 		try {
 			if(utenteSessione.getRuolo().equals("amministratore")) {
-				request.setAttribute("ordini", ordiniDao.doRetrieveAll());
+				request.setAttribute("ordini", ordiniDao.doRetrieveByFiltri(dataDa, dataA, idUtente));
 			}
 			else {
-				request.setAttribute("ordini", ordiniDao.doRetrieveByFiltri(null, null, utenteSessione.getId()));
+				request.setAttribute("ordini", ordiniDao.doRetrieveByFiltri(dataDa, dataA, utenteSessione.getId()));
 			}
 		} 
 		catch (SQLException e) {

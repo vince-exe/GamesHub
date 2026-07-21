@@ -19,7 +19,7 @@
 		<ul class="nav-menu">
 			<li><a href="<%=request.getContextPath()%>/home" class="nav-link">Home</a></li>
 			<li><a href="<%=request.getContextPath()%>/catalogo" class="nav-link">Catalogo</a></li>
-			<%if(utente != null && "cliente".equals(utente.getRuolo())) { %>
+			<%if(utente != null) { %>
 	        	<li><a href="<%=request.getContextPath()%>/ordini" class="nav-link">Ordini</a></li>
 	        <%} %>
         </ul>

@@ -47,6 +47,7 @@ public class LoginServlet extends HttpServlet {
 		} 
 		catch (SQLException e) {
 			request.setAttribute("errore", "Errore imprevisto sul server");
+			request.getRequestDispatcher("/WEB-INF/view/login.jsp").forward(request, response);
 			e.printStackTrace();
 		}
 	}
