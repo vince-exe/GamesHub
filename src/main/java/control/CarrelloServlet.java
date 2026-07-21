@@ -42,6 +42,8 @@ public class CarrelloServlet extends HttpServlet {
 		switch (action) {
 		case "add":
 			try {
+				ProdottoBean prodotto = prodottoDao.doRetrieveById(idProdotto);
+				
 				CarrelloBean itemEsistente = null;
 				for(CarrelloBean item : carrello) {
 					if(item.getProdotto().getId() == idProdotto) {
@@ -50,14 +52,27 @@ public class CarrelloServlet extends HttpServlet {
 					}
 				}
 
-				if(itemEsistente != null) {
+				if (prodotto.getDisponibilità() <= 0) {
+					response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Prodotto esaurito.");
+					return;
+				}
+				
+				if(itemEsistente != null) {	
+					if (itemEsistente.getQuantita() + 1 > prodotto.getDisponibilità()) {
+						response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Quantità massima disponibile raggiunta.");
+						return;
+					}
+						
 					itemEsistente.setQuantita(itemEsistente.getQuantita() + 1);
 
 					response.setStatus(HttpServletResponse.SC_OK);
 					return;
 				} 
-				else {
-					ProdottoBean prodotto = prodottoDao.doRetrieveById(idProdotto);
+				else {					
+					if(prodotto.getDisponibilità() <= 0) {
+						response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Prodotto esaurito.");
+						return;
+					}
 					
 					CarrelloBean nuovoItem = new CarrelloBean(prodotto, 1);
 					carrello.add(nuovoItem);
@@ -81,6 +96,12 @@ public class CarrelloServlet extends HttpServlet {
 					carrello.removeIf(item -> item.getProdotto().getId() == idProdotto);
 				} 
 				else {
+					ProdottoBean prodotto = prodottoDao.doRetrieveById(idProdotto);
+	                if (nuovaQuantita > prodotto.getDisponibilità()) {
+	                    response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Quantità massima disponibile raggiunta (" + prodotto.getDisponibilità() + " disponibili).");
+	                    return;
+	                }
+	                
 					for (CarrelloBean item : carrello) {
 						if (item.getProdotto().getId() == idProdotto) {
 							item.setQuantita(nuovaQuantita);
@@ -97,9 +118,9 @@ public class CarrelloServlet extends HttpServlet {
 					
 					jsonStr.append("{\"id\":").append(p.getId())
 						   .append(", \"nome\":\"").append(p.getNome().replace("\"", "\\\""))
-						   .append("\", \"prezzo\":").append(String.format(java.util.Locale.US, "%.2f", p.getPrezzo().doubleValue()))
+						   .append("\", \"prezzo\":").append(p.getPrezzo().doubleValue())
 						   .append(", \"quantita\":").append(item.getQuantita())
-						   .append(", \"subtotale\":").append(String.format(java.util.Locale.US, "%.2f", subtotale))
+						   .append(", \"subtotale\":").append(subtotale)
 						   .append("}");
 					
 					if (i < carrello.size() - 1) {
@@ -139,9 +160,9 @@ public class CarrelloServlet extends HttpServlet {
 					
 					jsonStr.append("{\"id\":").append(p.getId())
 						   .append(", \"nome\":\"").append(p.getNome().replace("\"", "\\\""))
-						   .append("\", \"prezzo\":").append(String.format(java.util.Locale.US, "%.2f", p.getPrezzo().doubleValue()))
+						   .append("\", \"prezzo\":").append(p.getPrezzo().doubleValue())
 						   .append(", \"quantita\":").append(item.getQuantita())
-						   .append(", \"subtotale\":").append(String.format(java.util.Locale.US, "%.2f", subtotale))
+						   .append(", \"subtotale\":").append(subtotale)
 						   .append("}");
 					
 					if (i < carrello.size() - 1) {

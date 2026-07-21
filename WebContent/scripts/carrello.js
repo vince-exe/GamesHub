@@ -4,38 +4,13 @@ function aggiungiAlCarrello(idProdotto, contextPath) {
     fetch(url, { method: 'POST' })
     .then(response => {
         if (!response.ok) {
-			alert("Impossibile aggiungere un prodotto al carrello, STATUS: !OK");
+			alert("Impossibile aggiungere un prodotto al carrello");
+			return;
         }
 		alert("Prodotto aggiunto al carrello con successo!");
     })
     .catch(error => {
 		alert("Si è verificato un errore durante l'aggiunta: " + error);        
-    });
-}
-
-function aggiornaQuantitaCarrello(idProdotto, nuovaQuantita, contextPath) {
-    const url = contextPath + "/carrello?action=update&id=" + idProdotto + "&quantita=" + nuovaQuantita;
-    
-    fetch(url, { method: 'POST' })
-    .then(response => {
-        if (!response.ok) {
-            throw new Error("Impossibile aggiornare la quantità.");
-        }
-        return response.json();
-    })
-    .then(carrelloAggiornato => {
-		const itemModificato = carrelloAggiornato.find(item => item.id === idProdotto);
-		        
-		const spanQuantita = document.getElementById(`quantita-${idProdotto}`);
-		spanQuantita.innerText = itemModificato.quantita;
-
-		const cellaSubtotale = document.getElementById(`subtotale-${idProdotto}`);
-		cellaSubtotale.innerText = "€ " + itemModificato.subtotale.toFixed(2);
-
-		ricalcolaTotaleCarrello();
-    })
-    .catch(error => {
-        alert("Si è verificato un errore durante l'aggiornamento: " + error);
     });
 }
 
@@ -53,7 +28,29 @@ function cambiaQuantita(idProdotto, cambio, contextPath) {
         }
     } 
 	else {
-        aggiornaQuantitaCarrello(idProdotto, nuovaQuantita, contextPath);
+		const url = contextPath + "/carrello?action=update&id=" + idProdotto + "&quantita=" + nuovaQuantita;
+
+		fetch(url, { method: 'POST' })
+		.then(response => {
+		    if (!response.ok) {
+		        throw new Error("Quantità massima disponibile raggiunta.");
+		    }
+		    return response.json();
+		})
+		.then(carrelloAggiornato => {
+			const itemModificato = carrelloAggiornato.find(item => item.id === idProdotto);
+			        
+			const spanQuantita = document.getElementById(`quantita-${idProdotto}`);
+			spanQuantita.innerText = itemModificato.quantita;
+
+			const cellaSubtotale = document.getElementById(`subtotale-${idProdotto}`);
+			cellaSubtotale.innerText = "€ " + itemModificato.subtotale.toFixed(2);
+
+			ricalcolaTotaleCarrello();
+		})
+		.catch(error => {
+		    alert("Si è verificato un errore durante l'aggiornamento: " + error);
+		});
     }
 }
 
@@ -82,12 +79,12 @@ function ricalcolaTotaleCarrello() {
     let nuovoTotale = 0.0;
 
     subtotali.forEach(cella => {
-        const valore = parseFloat(cella.innerText.replace('€', '').trim());
+        const valore = parseFloat(cella.innerText.replace('€', ''));
         if (!isNaN(valore)) {
             nuovoTotale += valore;
         }
     });
-
+	
     const strongTotale = document.getElementById('totale-carrello');
     if (strongTotale) {
         strongTotale.innerText = "€ " + nuovoTotale.toFixed(2);
