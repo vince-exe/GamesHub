@@ -33,10 +33,10 @@ public class OrdiniServlet extends HttpServlet {
         
 		try {
 			if(utenteSessione.getRuolo().equals("amministratore")) {
-				request.setAttribute("ordini", ordiniDao.doRetrieveByFiltri(dataDa, dataA, idUtente));
+				request.setAttribute("ordini", ordiniDao.doRetrieveParzialeByFiltri(dataDa, dataA, idUtente));
 			}
 			else {
-				request.setAttribute("ordini", ordiniDao.doRetrieveByFiltri(dataDa, dataA, utenteSessione.getId()));
+				request.setAttribute("ordini", ordiniDao.doRetrieveParzialeByFiltri(dataDa, dataA, utenteSessione.getId()));
 			}
 		} 
 		catch (SQLException e) {

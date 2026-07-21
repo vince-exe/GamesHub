@@ -8,7 +8,7 @@ import model.OrdineBean;
 public interface IOrdineDao {
 	public void doSave(OrdineBean ordine) throws SQLException;
 	
-	public List<OrdineBean> doRetrieveAll() throws SQLException;
+	public List<OrdineBean> doRetrieveParzialeByFiltri(String dataDa, String dataA, int idUtente) throws SQLException;
 	
-	public List<OrdineBean> doRetrieveByFiltri(String dataDa, String dataA, int idUtente) throws SQLException;
+	public OrdineBean doRetrieveByKey(int idOrdine) throws SQLException;
 }
