@@ -58,25 +58,15 @@ CREATE TABLE Ordine (
 );
 
 CREATE TABLE RigaOrdine (
-    id INT AUTO_INCREMENT,
     idOrdine INT NOT NULL,
+    idProdotto INT NOT NULL,
     quantita INT NOT NULL DEFAULT 1,
     prezzoAcquisto DECIMAL(10,2) NOT NULL,
-    
-    nome VARCHAR(100) NOT NULL,
-    descrizione VARCHAR(200),
-    prezzo DECIMAL(10, 2) NOT NULL,
-    immagine LONGBLOB,
-    disponibilita INT NOT NULL DEFAULT 0,
-    tipologia VARCHAR(50),
-    genere VARCHAR(50),
-    piattaforma VARCHAR(50),
-    chiaveAttivazione VARCHAR(100),
-    casaProduttrice VARCHAR(100),
-    
-    PRIMARY KEY (id),
+    PRIMARY KEY (idOrdine, idProdotto),
     CONSTRAINT FK_Composizione_Ordine FOREIGN KEY (idOrdine) 
-        REFERENCES Ordine(id) ON DELETE CASCADE
+        REFERENCES Ordine(id) ON DELETE CASCADE,
+    CONSTRAINT FK_Composizione_Prodotto FOREIGN KEY (idProdotto) 
+        REFERENCES Prodotto(id) ON DELETE RESTRICT
 );
 
 -- AMMINISTRATORE --
