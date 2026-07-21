@@ -56,7 +56,7 @@ public class CheckoutServlet extends HttpServlet {
             indirizzo.setCittà(request.getParameter("citta"));
             indirizzo.setCap(request.getParameter("cap"));
             indirizzo.setPaese(request.getParameter("paese"));
-
+            
             MetodoPagamentoBean metodo = new MetodoPagamentoBean();
             metodo.setIdUtente(utenteSessione.getId());
             metodo.setTipologia(request.getParameter("tipologiaPagamento"));
@@ -83,14 +83,24 @@ public class CheckoutServlet extends HttpServlet {
             List<RigaOrdineBean> listaRighe = new ArrayList<>();
 
             for (CarrelloBean item : carrello) {
-                RigaOrdineBean riga = new RigaOrdineBean();
+            	RigaOrdineBean riga = new RigaOrdineBean();
+
                 riga.setIdProdotto(item.getProdotto().getId());
                 riga.setQuantita(item.getQuantita());
                 riga.setPrezzoAcquisto(item.getProdotto().getPrezzo());
                 
-                BigDecimal subtotale = riga.getPrezzoAcquisto().multiply(BigDecimal.valueOf(riga.getQuantita()));
+                riga.setNome(item.getProdotto().getNome());
+                riga.setDescrizione(item.getProdotto().getDescrizione());
+                riga.setImmagine(item.getProdotto().getImmagine().readAllBytes());
+                riga.setTipologia(item.getProdotto().getTipologia());
+                riga.setGenere(item.getProdotto().getGenere());
+                riga.setPiattaforma(item.getProdotto().getPiattaforma());
+                riga.setChiaveAttivazione(item.getProdotto().getChiaveAttivazione());
+                riga.setCasaProduttrice(item.getProdotto().getCasaProduttrice());
                 
+                BigDecimal subtotale = riga.getPrezzoAcquisto().multiply(BigDecimal.valueOf(riga.getQuantita()));
                 totaleComplessivo = totaleComplessivo.add(subtotale);
+                
                 listaRighe.add(riga);
             }
             
