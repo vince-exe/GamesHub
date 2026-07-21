@@ -37,6 +37,7 @@ public class OrdineDao implements IOrdineDao {
         Connection connection = null;
         PreparedStatement psOrdine = null;
         PreparedStatement psRiga = null;
+        PreparedStatement psUpdateStock = null;
 
         String insertOrdineQuery = "INSERT INTO Ordine (idUtente, totale, note, "
                 + "spedizione_via, spedizione_cap, spedizione_citta, spedizione_paese, spedizione_civico, "
@@ -44,6 +45,8 @@ public class OrdineDao implements IOrdineDao {
                 + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         String insertRigaQuery = "INSERT INTO RigaOrdine (idOrdine, idProdotto, quantita, prezzoAcquisto) VALUES (?, ?, ?, ?)";
+
+        String updateStockQuery = "UPDATE Prodotto SET disponibilita = disponibilita - ? WHERE id = ?";
 
         try {
             connection = ds.getConnection();
@@ -77,37 +80,44 @@ public class OrdineDao implements IOrdineDao {
                 idOrdine = rs.getInt(1);
                 ordine.setId(idOrdine);
             }
+
             psRiga = connection.prepareStatement(insertRigaQuery);
-                
+            psUpdateStock = connection.prepareStatement(updateStockQuery);
+
             for(RigaOrdineBean riga : ordine.getRigheOrdine()) {
-            	riga.setIdOrdine(idOrdine);
+                riga.setIdOrdine(idOrdine);
                     
                 psRiga.setInt(1, riga.getIdOrdine());
                 psRiga.setInt(2, riga.getIdProdotto());
                 psRiga.setInt(3, riga.getQuantita());
                 psRiga.setBigDecimal(4, riga.getPrezzoAcquisto());
-                    
                 psRiga.addBatch();
+
+                psUpdateStock.setInt(1, riga.getQuantita());
+                psUpdateStock.setInt(2, riga.getIdProdotto());
+                psUpdateStock.addBatch();
             }
             
             psRiga.executeBatch();
+            psUpdateStock.executeBatch();
             
             connection.commit();
 
         } 
         catch(SQLException e) {
         	connection.rollback();
-        	e.printStackTrace();
+            e.printStackTrace();
             throw e;
         } 
         finally {
-            if (psOrdine != null)
+            if(psOrdine != null)
             	psOrdine.close();
-            
-            if (psRiga != null)
+            if(psRiga != null)
             	psRiga.close();
+            if(psUpdateStock != null)
+            	psUpdateStock.close();
             
-            if (connection != null) {
+            if(connection != null) {
             	connection.setAutoCommit(true);
                 connection.close();
             }
@@ -182,6 +192,14 @@ public class OrdineDao implements IOrdineDao {
                     ordine.setNote(rs.getString("note"));
                     ordine.setData(rs.getTimestamp("data"));
 
+                    IndirizzoBean indirizzo = new IndirizzoBean();
+                    indirizzo.setVia(rs.getString("spedizione_via"));
+                    indirizzo.setCap(rs.getString("spedizione_cap"));
+                    indirizzo.setCittà(rs.getString("spedizione_citta"));
+                    indirizzo.setPaese(rs.getString("spedizione_paese"));
+                    indirizzo.setCivico(rs.getString("spedizione_civico"));
+                    ordine.setIndirizzoBean(indirizzo);
+                    
                     ordini.add(ordine);
                 }
             }

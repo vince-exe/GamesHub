@@ -76,16 +76,10 @@
                             <td><strong><%= ordine.getIdUtente() %></strong></td>
                         <% } %>
                         
-                        <td>
-                            <% if(ordine.getIndirizzoBean() != null) { %>
-                                <%= ordine.getIndirizzoBean().getVia() %>, <%= ordine.getIndirizzoBean().getCittà() %>
-                            <% } else { %>
-                                -
-                            <% } %>
-                        </td>
+                        <td><%= ordine.getIndirizzoBean().getVia() %>, <%= ordine.getIndirizzoBean().getCittà() %></td>
                         
                         <td><strong>€ <%= String.format("%.2f", ordine.getTotale()) %></strong></td>
-                        <td><%= (ordine.getNote() != null && !ordine.getNote().trim().isEmpty()) ? ordine.getNote() : "-" %></td>
+                        <td><%=(ordine.getNote() == null || ordine.getNote().isEmpty()) ? "-" : ordine.getNote()%></td>
                         
                         <td class="container-azioni">
                         	<a class="azione azione-visualizza"
