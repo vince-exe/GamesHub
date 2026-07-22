@@ -1,0 +1,79 @@
+@charset "UTF-8";
+
+.container-dettagli-ordine {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    padding: 25px;
+    color: #fff;
+    gap: 10px;
+}
+
+.tabella-dettagli-ordine {
+    width: 100%;
+    background-color: #1e2530;
+    border-collapse: collapse;
+    color: #fff;
+    table-layout: fixed;
+}
+
+.tabella-dettagli-ordine th:nth-child(1) { width: 10%; }  /* Immagine */
+.tabella-dettagli-ordine th:nth-child(2) { width: 25%; }  /* Nome Prodotto */
+.tabella-dettagli-ordine th:nth-child(3) { width: 35%; }  /* Descrizione */
+.tabella-dettagli-ordine th:nth-child(4) { width: 15%; }  /* Prezzo d'Acquisto */
+.tabella-dettagli-ordine th:nth-child(5) { width: 15%; }  /* Metodo di Pagamento */
+
+.tabella-dettagli-ordine td {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.tabella-dettagli-ordine th, 
+.tabella-dettagli-ordine td {
+    padding: 12px 10px;
+    text-align: left;
+    vertical-align: middle;
+}
+
+.tabella-dettagli-ordine th {
+    background-color: #151a23;
+    color: #00d2ff;
+    text-transform: uppercase;
+    font-size: 13px;
+}
+
+.tabella-dettagli-ordine tr:hover {
+    background-color: #252e3c;
+}
+
+.img-prodotto-ordine {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 6px;
+    border: 1px solid #2d3748;
+    background-color: #111923;
+    display: block;
+}
+
+.nome-prodotto-ordine {
+    font-weight: 600;
+    color: #ffffff;
+    font-size: 0.95rem;
+}
+
+.prezzo-testo {
+    font-weight: bold;
+    color: #00d2ff;
+}
+
+@media screen and (max-width: 1200px) {
+    .container-dettagli-ordine {
+        overflow-x: auto;
+    }
+    
+    .tabella-dettagli-ordine {
+        width: 1100px;
+    }
+}
