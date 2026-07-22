@@ -20,6 +20,11 @@ public class EliminaProdottoServlet extends HttpServlet {
     }
     
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {		
+		if(!UtilityForServlets.isAdmin(request)) {
+			response.sendRedirect(request.getContextPath() + "/home");
+			return;
+		}
+		
 		ProdottoDao prodottoDao = new ProdottoDao();
 		int idProdotto = Integer.parseInt(request.getParameter("id"));
 		

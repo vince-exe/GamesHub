@@ -11,9 +11,9 @@ import model.ProdottoBean;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.sql.SQLException;
-import java.sql.SQLIntegrityConstraintViolationException;
 
 import dao.ProdottoDao;
+import control.UtilityForServlets;
 
 @WebServlet("/aggiungiModificaProdotto")
 @MultipartConfig // perché nel frontend utilizzo multipart/form-data
@@ -21,6 +21,11 @@ public class AggiungiModificaProdottoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		if(!UtilityForServlets.isAdmin(request)) {
+			response.sendRedirect(request.getContextPath() + "/home");
+			return;
+		}
+		
 		String idProdottoStr = request.getParameter("id");
 		
 		if(idProdottoStr == null) { // aggiungi il prodotto
